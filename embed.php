@@ -8,6 +8,13 @@
 </head>
 <body>
   <?php
-    echo '<h1>Hello World</h1>'
+    //Variables
+    $name = 'Edwin'; //string
+    $number = 100;  //number
+
+    //Concatenate
+    $concatenate = $name . ' ' . $number;
   ?>
+
+  <h1> <?php echo $concatenate ?> <h1>
 </body>
