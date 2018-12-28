@@ -8,8 +8,6 @@
 </head>
 <body>
   <?php
-    $title = 'Edwin Diaz\'s Site'
+    echo '<h1>Hello World</h1>'
   ?>
-
-  <h1><?php echo $title ?></h1>
 </body>
