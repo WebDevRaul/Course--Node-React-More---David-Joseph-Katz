@@ -12,6 +12,10 @@
     $name = 'Edwin'; //string
     $number = 100;  //number
 
+    //Arrays
+    $numberList = array(2, 34, 5, 101); // old :P
+    $numberList2 = [2, 34, 5, 101]; // new :P
+
     //Math
     $number1 = 10;
     $number2 = 15;
@@ -22,5 +26,5 @@
     $concatenate = $name . ' ' . $number;
   ?>
 
-  <h1> <?php echo $result ?> <h1>
+  <h1> <?php echo $numberList2[3] ?> <h1>
 </body>
