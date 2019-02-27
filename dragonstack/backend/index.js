@@ -14,11 +14,11 @@ const baloo = new Dragon({
 
 const mimar = new Dragon();
 
-setTimeout(() => {
-  const gooby = new Dragon();
-  console.log('gooby', gooby);
-}, 3000);
+// setTimeout(() => {
+//   const gooby = new Dragon();
+//   console.log('gooby', gooby);
+// }, 3000);
 
-console.log('mimar', mimar);
-console.log('fooey', fooey);
-console.log('baloo', baloo)
+// console.log('mimar', mimar);
+// console.log('fooey', fooey);
+// console.log('baloo', baloo);
