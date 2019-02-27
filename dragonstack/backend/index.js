@@ -6,7 +6,10 @@ const fooey = new Dragon({
 });
 const baloo = new Dragon({
   birthdate: new Date(),
-  nickname: 'baloo'
+  nickname: 'baloo',
+  traits: [{
+    traitType: 'backgroundColor', traitValue: 'green'
+  }]
 });
 
 const mimar = new Dragon();
@@ -16,4 +19,6 @@ setTimeout(() => {
   console.log('gooby', gooby);
 }, 3000);
 
-console.log('mimar', mimar)
+console.log('mimar', mimar);
+console.log('fooey', fooey);
+console.log('baloo', baloo)
