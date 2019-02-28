@@ -1,14 +1,8 @@
-const Generation = require('./generation');
+const GenerationEngine = require('./engine');
 
-const generation = new Generation();
+const engine  = new GenerationEngine();
 
-console.log('generation', generation)
 
-const gooby = generation.newDragon();
+engine.start();
 
-console.log('gooby', gooby)
-
-setTimeout(() => {
-  const mimar = generation.newDragon();
-  console.log('mimar', mimar);
-}, 15000)
+setTimeout(() => engine.stop(), 20000)

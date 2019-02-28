@@ -1,5 +1,10 @@
 const Dragon = require('./dragon');
 
+const Generation = require('./generation');
+const generation = new Generation();
+
+
+
 const fooey = new Dragon({
   birthdate:new Date(),
   nickname: 'fooey'
@@ -12,4 +17,10 @@ const baloo = new Dragon({
   }]
 });
 
-const mimar = new Dragon();
+console.log('fooey', fooey);
+console.log('baloo', baloo);
+
+setTimeout(() => {
+  const mimar = generation.newDragon();
+  console.log('mimar', mimar);
+}, 15000)
