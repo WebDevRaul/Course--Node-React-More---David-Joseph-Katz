@@ -3,6 +3,7 @@ const Dragon = require('./dragon');
 const Generation = require('./generation');
 const generation = new Generation();
 
+const engine  = new GenerationEngine();
 
 
 const fooey = new Dragon({
@@ -23,4 +24,8 @@ console.log('baloo', baloo);
 setTimeout(() => {
   const mimar = generation.newDragon();
   console.log('mimar', mimar);
-}, 15000)
+}, 15000);
+
+engine.start();
+
+setTimeout(() => engine.stop(), 20000)
