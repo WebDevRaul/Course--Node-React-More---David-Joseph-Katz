@@ -1,0 +1,1 @@
+// For git bash users run the command chcp.com 1252 before running postgres
