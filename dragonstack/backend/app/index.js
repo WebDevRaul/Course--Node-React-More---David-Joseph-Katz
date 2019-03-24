@@ -1,20 +1,25 @@
 const express = require('express');
 const GenerationEngine = require('./generation/engine');
-
-const dragonRouter = require('./api/dragons');
+const dragonRouter = require('./api/dragon');
 const generationRouter = require('./api/generation');
 
 const app = express();
+const engine = new GenerationEngine();
 
-const engine  = new GenerationEngine();
 app.locals.engine = engine;
 
-
 app.use('/dragon', dragonRouter);
-app.use('/generation', generationRouter)
+app.use('/generation', generationRouter);
 
-engine.start();
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
 
-// engine.stop()
+  res.status(statusCode).json({ 
+    type: 'error', message: err.message
+   })
+});
+
+engine.start(); 
+
 
 module.exports = app;
