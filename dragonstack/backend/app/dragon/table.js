@@ -16,10 +16,10 @@ class DragonTable {
 
            Promise.all(dragon.traits.map(({ traitType, traitValue }) => {
              return DragonTraitTable.storeDragonTrait({
-               draginId, traitType, traitValue
+               dragonId, traitType, traitValue
              });
            }))
-           .then(() => resolve({ draginId }))
+           .then(() => resolve({ dragonId }))
            .catch(err => reject(err));
          }
       )
