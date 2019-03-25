@@ -18,8 +18,8 @@ class TraitTable {
   }
 }
 
-TraitTable.getTraitId({ traitType: 'backgroundColor', traitValue: 'green' })
-  .then(({traitId}) => console.log("traitId", traitId))
-  .catch(err => console.error('err', err));
+// TraitTable.getTraitId({ traitType: 'backgroundColor', traitValue: 'green' })
+//   .then(({traitId}) => console.log("traitId", traitId))
+//   .catch(err => console.error('err', err));
 
 module.exports = TraitTable;
