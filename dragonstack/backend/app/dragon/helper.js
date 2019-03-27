@@ -3,7 +3,7 @@ const DragonTable = require('./table');
 const Dragon = require('./index');
 
 const getDragondWithTraits = ({dragonId}) => {
-  return new Promise.all([
+  return Promise.all([
     DragonTable.getDragon({dragonId}),
     new Promise((resolve, reject) => {
       pool.query(`
@@ -30,5 +30,9 @@ const getDragondWithTraits = ({dragonId}) => {
   })
   .catch(err => console.error(err));
 };
+
+getDragondWithTraits({ dragonId: 1 })
+  .then(dragon => console.log(dragon))
+  .catch(err => console.log(err))
 
 module.exports = { getDragondWithTraits };
