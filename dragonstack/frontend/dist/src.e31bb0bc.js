@@ -25746,6 +25746,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+var DEFAULT_GENERATION = {
+  generationId: '',
+  expiration: ''
+};
+
 var Generation =
 /*#__PURE__*/
 function (_Component) {
@@ -25766,12 +25771,17 @@ function (_Component) {
 
     return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Generation)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
       generation: {
-        generationId: 999,
-        expiration: '2020-05-01'
+        DEFAULT_GENERATION: DEFAULT_GENERATION
       }
     }, _this.fetchGeneration = function () {
       fetch('http://localhost:3000/generation').then(function (res) {
-        return console.log(res);
+        return res.json();
+      }).then(function (json) {
+        return _this.setState({
+          generation: json.generation
+        });
+      }).catch(function (err) {
+        return console.log(err);
       });
     }, _temp));
   }

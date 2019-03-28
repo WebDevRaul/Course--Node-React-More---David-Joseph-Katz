@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 
+const DEFAULT_GENERATION = { generationId: '', expiration: '' }
+
 class Generation extends Component {
   state = {
-    generation: {
-      generationId: 999,
-      expiration: '2020-05-01'
-    }
+    generation: { DEFAULT_GENERATION }
   };
 
   componentDidMount() {
     this.fetchGeneration();
-  }
+  };
 
   fetchGeneration = () => {
     fetch('http://localhost:3000/generation')
-      .then(res => console.log(res))
-  }
+      .then(res => res.json())
+      .then(json => this.setState({ generation: json.generation }))
+      .catch(err => console.log(err));
+  };
 
   render() {
     const { generation } = this.state;
