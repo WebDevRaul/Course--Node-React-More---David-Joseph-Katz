@@ -25750,6 +25750,7 @@ var DEFAULT_GENERATION = {
   generationId: '',
   expiration: ''
 };
+var MINIMUM_DELAY = 3000;
 
 var Generation =
 /*#__PURE__*/
@@ -25773,7 +25774,7 @@ function (_Component) {
       generation: {
         DEFAULT_GENERATION: DEFAULT_GENERATION
       }
-    }, _this.fetchGeneration = function () {
+    }, _this.timer = null, _this.fetchGeneration = function () {
       fetch('http://localhost:3000/generation').then(function (res) {
         return res.json();
       }).then(function (json) {
@@ -25783,13 +25784,31 @@ function (_Component) {
       }).catch(function (err) {
         return console.log(err);
       });
+    }, _this.fetchNextGeneration = function () {
+      _this.fetchGeneration();
+
+      var delay = new Date(_this.state.generation.expiration).getTime() - new Date().getTime();
+
+      if (delay < MINIMUM_DELAY) {
+        delay = MINIMUM_DELAY;
+      }
+
+      ;
+      _this.timer = setTimeout(function () {
+        return _this.fetchNextGeneration();
+      }, delay);
     }, _temp));
   }
 
   _createClass(Generation, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.fetchGeneration();
+      this.fetchNextGeneration();
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      clearTimeout(this.timer);
     }
   }, {
     key: "render",
