@@ -1,4 +1,5 @@
 import React, { Component} from 'react';
+import DragonAvatar from './DragonAvatar';
 
 const DEFAULT_DRAGON = {
   dragonId: '',
@@ -23,15 +24,7 @@ class Dragon extends Component {
   };
 
   render() {
-    const { generationId, dragonId, nickname, birthdate, traits } = this.state.dragon;
-
-    return(
-      <div>
-        <span>G.{generationId}</span>
-        <span>I{dragonId}.</span>
-        {traits.map(i => i.traitValue).join(', ')}
-      </div>
-    )
+    return <DragonAvatar dragon={this.state.dragon} />;
   }
 };
 
