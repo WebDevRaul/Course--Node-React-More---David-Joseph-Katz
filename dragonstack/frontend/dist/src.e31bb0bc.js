@@ -41939,6 +41939,33 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+var propertyMap = {
+  backgroundColor: {
+    black: '#264338',
+    white: '#cfd8dc',
+    green: '#85d6a7',
+    blue: '#0277bd'
+  },
+  build: {
+    slender: slender,
+    stocky: stocky,
+    sporty: sporty,
+    skinny: skinny
+  },
+  pattern: {
+    plain: plain,
+    striped: striped,
+    spotted: spotted,
+    patchy: patchy
+  },
+  size: {
+    small: 100,
+    medium: 140,
+    large: 180,
+    enormous: 220
+  }
+};
+
 var DragonAvatar =
 /*#__PURE__*/
 function (_Component) {
