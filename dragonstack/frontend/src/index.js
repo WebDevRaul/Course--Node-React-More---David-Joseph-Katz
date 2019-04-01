@@ -7,7 +7,7 @@ import './index.css'
 
 render(
   <div>
-    <h2>Dragon Stack</h2>
+    <h2>Dragon Stack test</h2>
     <Generation />
     <Dragon />
   </div>,

@@ -41909,7 +41909,95 @@ var _ToggleButtonGroup2 = _interopRequireDefault(require("./ToggleButtonGroup"))
 var _Tooltip2 = _interopRequireDefault(require("./Tooltip"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./Alert":"../node_modules/react-bootstrap/es/Alert.js","./Badge":"../node_modules/react-bootstrap/es/Badge.js","./Breadcrumb":"../node_modules/react-bootstrap/es/Breadcrumb.js","./BreadcrumbItem":"../node_modules/react-bootstrap/es/BreadcrumbItem.js","./Button":"../node_modules/react-bootstrap/es/Button.js","./ButtonGroup":"../node_modules/react-bootstrap/es/ButtonGroup.js","./ButtonToolbar":"../node_modules/react-bootstrap/es/ButtonToolbar.js","./Card":"../node_modules/react-bootstrap/es/Card.js","./CardColumns":"../node_modules/react-bootstrap/es/CardColumns.js","./CardDeck":"../node_modules/react-bootstrap/es/CardDeck.js","./CardImg":"../node_modules/react-bootstrap/es/CardImg.js","./CardGroup":"../node_modules/react-bootstrap/es/CardGroup.js","./Carousel":"../node_modules/react-bootstrap/es/Carousel.js","./CarouselItem":"../node_modules/react-bootstrap/es/CarouselItem.js","./CloseButton":"../node_modules/react-bootstrap/es/CloseButton.js","./Col":"../node_modules/react-bootstrap/es/Col.js","./Collapse":"../node_modules/react-bootstrap/es/Collapse.js","./Dropdown":"../node_modules/react-bootstrap/es/Dropdown.js","./DropdownButton":"../node_modules/react-bootstrap/es/DropdownButton.js","./DropdownItem":"../node_modules/react-bootstrap/es/DropdownItem.js","./Fade":"../node_modules/react-bootstrap/es/Fade.js","./Form":"../node_modules/react-bootstrap/es/Form.js","./FormControl":"../node_modules/react-bootstrap/es/FormControl.js","./FormCheck":"../node_modules/react-bootstrap/es/FormCheck.js","./FormGroup":"../node_modules/react-bootstrap/es/FormGroup.js","./FormLabel":"../node_modules/react-bootstrap/es/FormLabel.js","./FormText":"../node_modules/react-bootstrap/es/FormText.js","./Container":"../node_modules/react-bootstrap/es/Container.js","./Image":"../node_modules/react-bootstrap/es/Image.js","./Figure":"../node_modules/react-bootstrap/es/Figure.js","./InputGroup":"../node_modules/react-bootstrap/es/InputGroup.js","./Jumbotron":"../node_modules/react-bootstrap/es/Jumbotron.js","./ListGroup":"../node_modules/react-bootstrap/es/ListGroup.js","./ListGroupItem":"../node_modules/react-bootstrap/es/ListGroupItem.js","./Media":"../node_modules/react-bootstrap/es/Media.js","./Modal":"../node_modules/react-bootstrap/es/Modal.js","./ModalBody":"../node_modules/react-bootstrap/es/ModalBody.js","./ModalDialog":"../node_modules/react-bootstrap/es/ModalDialog.js","./ModalFooter":"../node_modules/react-bootstrap/es/ModalFooter.js","./ModalTitle":"../node_modules/react-bootstrap/es/ModalTitle.js","./Nav":"../node_modules/react-bootstrap/es/Nav.js","./Navbar":"../node_modules/react-bootstrap/es/Navbar.js","./NavbarBrand":"../node_modules/react-bootstrap/es/NavbarBrand.js","./NavDropdown":"../node_modules/react-bootstrap/es/NavDropdown.js","./NavItem":"../node_modules/react-bootstrap/es/NavItem.js","./Overlay":"../node_modules/react-bootstrap/es/Overlay.js","./OverlayTrigger":"../node_modules/react-bootstrap/es/OverlayTrigger.js","./PageItem":"../node_modules/react-bootstrap/es/PageItem.js","./Pagination":"../node_modules/react-bootstrap/es/Pagination.js","./Popover":"../node_modules/react-bootstrap/es/Popover.js","./ProgressBar":"../node_modules/react-bootstrap/es/ProgressBar.js","./ResponsiveEmbed":"../node_modules/react-bootstrap/es/ResponsiveEmbed.js","./Row":"../node_modules/react-bootstrap/es/Row.js","./SafeAnchor":"../node_modules/react-bootstrap/es/SafeAnchor.js","./Spinner":"../node_modules/react-bootstrap/es/Spinner.js","./SplitButton":"../node_modules/react-bootstrap/es/SplitButton.js","./Tab":"../node_modules/react-bootstrap/es/Tab.js","./TabContainer":"../node_modules/react-bootstrap/es/TabContainer.js","./TabContent":"../node_modules/react-bootstrap/es/TabContent.js","./Table":"../node_modules/react-bootstrap/es/Table.js","./TabPane":"../node_modules/react-bootstrap/es/TabPane.js","./Tabs":"../node_modules/react-bootstrap/es/Tabs.js","./ThemeProvider":"../node_modules/react-bootstrap/es/ThemeProvider.js","./ToggleButton":"../node_modules/react-bootstrap/es/ToggleButton.js","./ToggleButtonGroup":"../node_modules/react-bootstrap/es/ToggleButtonGroup.js","./Tooltip":"../node_modules/react-bootstrap/es/Tooltip.js"}],"components/DragonAvatar.js":[function(require,module,exports) {
+},{"./Alert":"../node_modules/react-bootstrap/es/Alert.js","./Badge":"../node_modules/react-bootstrap/es/Badge.js","./Breadcrumb":"../node_modules/react-bootstrap/es/Breadcrumb.js","./BreadcrumbItem":"../node_modules/react-bootstrap/es/BreadcrumbItem.js","./Button":"../node_modules/react-bootstrap/es/Button.js","./ButtonGroup":"../node_modules/react-bootstrap/es/ButtonGroup.js","./ButtonToolbar":"../node_modules/react-bootstrap/es/ButtonToolbar.js","./Card":"../node_modules/react-bootstrap/es/Card.js","./CardColumns":"../node_modules/react-bootstrap/es/CardColumns.js","./CardDeck":"../node_modules/react-bootstrap/es/CardDeck.js","./CardImg":"../node_modules/react-bootstrap/es/CardImg.js","./CardGroup":"../node_modules/react-bootstrap/es/CardGroup.js","./Carousel":"../node_modules/react-bootstrap/es/Carousel.js","./CarouselItem":"../node_modules/react-bootstrap/es/CarouselItem.js","./CloseButton":"../node_modules/react-bootstrap/es/CloseButton.js","./Col":"../node_modules/react-bootstrap/es/Col.js","./Collapse":"../node_modules/react-bootstrap/es/Collapse.js","./Dropdown":"../node_modules/react-bootstrap/es/Dropdown.js","./DropdownButton":"../node_modules/react-bootstrap/es/DropdownButton.js","./DropdownItem":"../node_modules/react-bootstrap/es/DropdownItem.js","./Fade":"../node_modules/react-bootstrap/es/Fade.js","./Form":"../node_modules/react-bootstrap/es/Form.js","./FormControl":"../node_modules/react-bootstrap/es/FormControl.js","./FormCheck":"../node_modules/react-bootstrap/es/FormCheck.js","./FormGroup":"../node_modules/react-bootstrap/es/FormGroup.js","./FormLabel":"../node_modules/react-bootstrap/es/FormLabel.js","./FormText":"../node_modules/react-bootstrap/es/FormText.js","./Container":"../node_modules/react-bootstrap/es/Container.js","./Image":"../node_modules/react-bootstrap/es/Image.js","./Figure":"../node_modules/react-bootstrap/es/Figure.js","./InputGroup":"../node_modules/react-bootstrap/es/InputGroup.js","./Jumbotron":"../node_modules/react-bootstrap/es/Jumbotron.js","./ListGroup":"../node_modules/react-bootstrap/es/ListGroup.js","./ListGroupItem":"../node_modules/react-bootstrap/es/ListGroupItem.js","./Media":"../node_modules/react-bootstrap/es/Media.js","./Modal":"../node_modules/react-bootstrap/es/Modal.js","./ModalBody":"../node_modules/react-bootstrap/es/ModalBody.js","./ModalDialog":"../node_modules/react-bootstrap/es/ModalDialog.js","./ModalFooter":"../node_modules/react-bootstrap/es/ModalFooter.js","./ModalTitle":"../node_modules/react-bootstrap/es/ModalTitle.js","./Nav":"../node_modules/react-bootstrap/es/Nav.js","./Navbar":"../node_modules/react-bootstrap/es/Navbar.js","./NavbarBrand":"../node_modules/react-bootstrap/es/NavbarBrand.js","./NavDropdown":"../node_modules/react-bootstrap/es/NavDropdown.js","./NavItem":"../node_modules/react-bootstrap/es/NavItem.js","./Overlay":"../node_modules/react-bootstrap/es/Overlay.js","./OverlayTrigger":"../node_modules/react-bootstrap/es/OverlayTrigger.js","./PageItem":"../node_modules/react-bootstrap/es/PageItem.js","./Pagination":"../node_modules/react-bootstrap/es/Pagination.js","./Popover":"../node_modules/react-bootstrap/es/Popover.js","./ProgressBar":"../node_modules/react-bootstrap/es/ProgressBar.js","./ResponsiveEmbed":"../node_modules/react-bootstrap/es/ResponsiveEmbed.js","./Row":"../node_modules/react-bootstrap/es/Row.js","./SafeAnchor":"../node_modules/react-bootstrap/es/SafeAnchor.js","./Spinner":"../node_modules/react-bootstrap/es/Spinner.js","./SplitButton":"../node_modules/react-bootstrap/es/SplitButton.js","./Tab":"../node_modules/react-bootstrap/es/Tab.js","./TabContainer":"../node_modules/react-bootstrap/es/TabContainer.js","./TabContent":"../node_modules/react-bootstrap/es/TabContent.js","./Table":"../node_modules/react-bootstrap/es/Table.js","./TabPane":"../node_modules/react-bootstrap/es/TabPane.js","./Tabs":"../node_modules/react-bootstrap/es/Tabs.js","./ThemeProvider":"../node_modules/react-bootstrap/es/ThemeProvider.js","./ToggleButton":"../node_modules/react-bootstrap/es/ToggleButton.js","./ToggleButtonGroup":"../node_modules/react-bootstrap/es/ToggleButtonGroup.js","./Tooltip":"../node_modules/react-bootstrap/es/Tooltip.js"}],"assests/skinny.png":[function(require,module,exports) {
+module.exports = "/skinny.8334b749.png";
+},{}],"assests/patchy.png":[function(require,module,exports) {
+module.exports = "/patchy.2581279c.png";
+},{}],"assests/plain.png":[function(require,module,exports) {
+module.exports = "/plain.bb67471e.png";
+},{}],"assests/slender.png":[function(require,module,exports) {
+module.exports = "/slender.2af8e272.png";
+},{}],"assests/spotted.png":[function(require,module,exports) {
+module.exports = "/spotted.240a0320.png";
+},{}],"assests/sporty.png":[function(require,module,exports) {
+module.exports = "/sporty.fea88c38.png";
+},{}],"assests/stocky.png":[function(require,module,exports) {
+module.exports = "/stocky.658237bb.png";
+},{}],"assests/striped.png":[function(require,module,exports) {
+module.exports = "/striped.6d9bbdab.png";
+},{}],"assests/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "skinny", {
+  enumerable: true,
+  get: function () {
+    return _skinny.default;
+  }
+});
+Object.defineProperty(exports, "patchy", {
+  enumerable: true,
+  get: function () {
+    return _patchy.default;
+  }
+});
+Object.defineProperty(exports, "plain", {
+  enumerable: true,
+  get: function () {
+    return _plain.default;
+  }
+});
+Object.defineProperty(exports, "slender", {
+  enumerable: true,
+  get: function () {
+    return _slender.default;
+  }
+});
+Object.defineProperty(exports, "spotted", {
+  enumerable: true,
+  get: function () {
+    return _spotted.default;
+  }
+});
+Object.defineProperty(exports, "sporty", {
+  enumerable: true,
+  get: function () {
+    return _sporty.default;
+  }
+});
+Object.defineProperty(exports, "stocky", {
+  enumerable: true,
+  get: function () {
+    return _stocky.default;
+  }
+});
+Object.defineProperty(exports, "striped", {
+  enumerable: true,
+  get: function () {
+    return _striped.default;
+  }
+});
+
+var _skinny = _interopRequireDefault(require("./skinny.png"));
+
+var _patchy = _interopRequireDefault(require("./patchy.png"));
+
+var _plain = _interopRequireDefault(require("./plain.png"));
+
+var _slender = _interopRequireDefault(require("./slender.png"));
+
+var _spotted = _interopRequireDefault(require("./spotted.png"));
+
+var _sporty = _interopRequireDefault(require("./sporty.png"));
+
+var _stocky = _interopRequireDefault(require("./stocky.png"));
+
+var _striped = _interopRequireDefault(require("./striped.png"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./skinny.png":"assests/skinny.png","./patchy.png":"assests/patchy.png","./plain.png":"assests/plain.png","./slender.png":"assests/slender.png","./spotted.png":"assests/spotted.png","./sporty.png":"assests/sporty.png","./stocky.png":"assests/stocky.png","./striped.png":"assests/striped.png"}],"components/DragonAvatar.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41918,6 +42006,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
+
+var _assests = require("../assests");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -41947,16 +42037,16 @@ var propertyMap = {
     blue: '#0277bd'
   },
   build: {
-    slender: slender,
-    stocky: stocky,
-    sporty: sporty,
-    skinny: skinny
+    slender: _assests.slender,
+    stocky: _assests.stocky,
+    sporty: _assests.sporty,
+    skinny: _assests.skinny
   },
   pattern: {
-    plain: plain,
-    striped: striped,
-    spotted: spotted,
-    patchy: patchy
+    plain: _assests.plain,
+    striped: _assests.striped,
+    spotted: _assests.spotted,
+    patchy: _assests.patchy
   },
   size: {
     small: 100,
@@ -41986,7 +42076,46 @@ function (_Component) {
           traits = _this$props$dragon.traits;
       return _react.default.createElement("div", null, _react.default.createElement("span", null, "G.", generationId), _react.default.createElement("span", null, "I", dragonId, "."), traits.map(function (i) {
         return i.traitValue;
-      }).join(', '));
+      }).join(', '), this.DragonImage);
+    }
+  }, {
+    key: "DragonImage",
+    get: function get() {
+      var dragonPropertyMap = {};
+      this.props.dragon.traits.map(function (i) {
+        var traitType = i.traitType,
+            traitValue = i.traitValue;
+        dragonPropertyMap[traitType] = propertyMap[traitType][traitValue];
+      });
+      var backgroundColor = dragonPropertyMap.backgroundColor,
+          build = dragonPropertyMap.build,
+          pattern = dragonPropertyMap.pattern,
+          size = dragonPropertyMap.size;
+      return _react.default.createElement("div", {
+        className: "dragon-avatar-image-wrapper"
+      }, _react.default.createElement("div", {
+        className: "dragon-avatar-image-background",
+        style: {
+          backgroundColor: backgroundColor,
+          width: size,
+          height: size
+        }
+      }, _react.default.createElement("img", {
+        src: pattern,
+        className: "dragon-avatar-image-pattern",
+        style: {
+          backgroundColor: backgroundColor,
+          width: size,
+          height: size
+        }
+      }), _react.default.createElement("img", {
+        src: build,
+        className: "dragon-avatar-image",
+        style: {
+          width: size,
+          height: size
+        }
+      })));
     }
   }]);
 
@@ -41996,7 +42125,7 @@ function (_Component) {
 ;
 var _default = DragonAvatar;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/Dragon.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../assests":"assests/index.js"}],"components/Dragon.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42182,7 +42311,7 @@ require("./index.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _reactDom.render)(_react.default.createElement("div", null, _react.default.createElement("h2", null, "Dragon Stack"), _react.default.createElement(_Generation.default, null), _react.default.createElement(_Dragon.default, null)), document.getElementById('root'));
+(0, _reactDom.render)(_react.default.createElement("div", null, _react.default.createElement("h2", null, "Dragon Stack test"), _react.default.createElement(_Generation.default, null), _react.default.createElement(_Dragon.default, null)), document.getElementById('root'));
 },{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/Generation":"components/Generation.js","./components/Dragon":"components/Dragon.js","./index.css":"index.css"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -42211,7 +42340,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59702" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64207" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
