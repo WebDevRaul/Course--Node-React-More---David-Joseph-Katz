@@ -28501,7 +28501,34 @@ var _Context = require("./components/Context");
 var _connect = _interopRequireDefault(require("./connect/connect"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./components/Provider":"../node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"../node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"../node_modules/react-redux/es/components/Context.js","./connect/connect":"../node_modules/react-redux/es/connect/connect.js"}],"components/Generation.js":[function(require,module,exports) {
+},{"./components/Provider":"../node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"../node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"../node_modules/react-redux/es/components/Context.js","./connect/connect":"../node_modules/react-redux/es/connect/connect.js"}],"actions/types.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GENERATION_ACTION_TYPE = void 0;
+var GENERATION_ACTION_TYPE = 'GENERATION_ACTION_TYPE';
+exports.GENERATION_ACTION_TYPE = GENERATION_ACTION_TYPE;
+},{}],"actions/generation.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.generationActionCreator = void 0;
+
+var _types = require("./types");
+
+var generationActionCreator = function generationActionCreator(payload) {
+  return {
+    type: _types.GENERATION_ACTION_TYPE,
+    generation: payload
+  };
+};
+
+exports.generationActionCreator = generationActionCreator;
+},{"./types":"actions/types.js"}],"components/Generation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28512,6 +28539,8 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactRedux = require("react-redux");
+
+var _generation = require("../actions/generation");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -28533,10 +28562,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var DEFAULT_GENERATION = {
-  generationId: '',
-  expiration: ''
-};
 var MINIMUM_DELAY = 3000;
 
 var Generation =
@@ -28557,24 +28582,18 @@ function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Generation)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      generation: {
-        DEFAULT_GENERATION: DEFAULT_GENERATION
-      }
-    }, _this.timer = null, _this.fetchGeneration = function () {
+    return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Generation)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.timer = null, _this.fetchGeneration = function () {
       fetch('http://localhost:3000/generation').then(function (res) {
         return res.json();
       }).then(function (json) {
-        return _this.setState({
-          generation: json.generation
-        });
+        return _this.props.dispatchGeneration(json.generation);
       }).catch(function (err) {
         return console.log(err);
       });
     }, _this.fetchNextGeneration = function () {
       _this.fetchGeneration();
 
-      var delay = new Date(_this.state.generation.expiration).getTime() - new Date().getTime();
+      var delay = new Date(_this.props.generation.expiration).getTime() - new Date().getTime();
 
       if (delay < MINIMUM_DELAY) {
         delay = MINIMUM_DELAY;
@@ -28617,12 +28636,20 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-var componentConnector = (0, _reactRedux.connect)(mapStateToProps);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    dispatchGeneration: function dispatchGeneration(generation) {
+      return dispatch((0, _generation.generationActionCreator)(generation));
+    }
+  };
+};
+
+var componentConnector = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps);
 
 var _default = componentConnector(Generation);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/generation":"actions/generation.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
 var define;
 /*!
   Copyright (c) 2017 Jed Watson.
@@ -43988,16 +44015,7 @@ function (_Component) {
 ;
 var _default = Dragon;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","./DragonAvatar":"components/DragonAvatar.js"}],"actions/types.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.GENERATION_ACTION_TYPE = void 0;
-var GENERATION_ACTION_TYPE = 'GENERATION_ACTION_TYPE';
-exports.GENERATION_ACTION_TYPE = GENERATION_ACTION_TYPE;
-},{}],"reducers/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","./DragonAvatar":"components/DragonAvatar.js"}],"reducers/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44025,25 +44043,7 @@ var generationReducer = function generationReducer(state, action) {
 };
 
 exports.generationReducer = generationReducer;
-},{"../actions/types":"actions/types.js"}],"actions/generation.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.generationActionCreator = void 0;
-
-var _types = require("./types");
-
-var generationActionCreator = function generationActionCreator(payload) {
-  return {
-    type: _types.GENERATION_ACTION_TYPE,
-    generation: payload
-  };
-};
-
-exports.generationActionCreator = generationActionCreator;
-},{"./types":"actions/types.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"../actions/types":"actions/types.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
