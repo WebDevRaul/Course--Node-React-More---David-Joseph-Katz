@@ -28662,7 +28662,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 
 var componentConnector = (0, _reactRedux.connect)(mapStateToProps, {
-  fetchGeneration: fetchGeneration
+  fetchGeneration: _generation.fetchGeneration
 });
 
 var _default = componentConnector(Generation);
@@ -44062,35 +44062,66 @@ var thunk = createThunkMiddleware();
 thunk.withExtraArgument = createThunkMiddleware;
 var _default = thunk;
 exports.default = _default;
-},{}],"reducers/index.js":[function(require,module,exports) {
+},{}],"reducers/generation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.generationReducer = void 0;
+exports.default = void 0;
 
 var _types = require("../actions/types");
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var DEFAULT_GENERATION = {
   generationId: '',
   expiration: ''
 };
 
-var generationReducer = function generationReducer(state, action) {
-  if (action.type === _types.GENERATION_ACTION_TYPE) {
-    return {
-      generation: action.generation
-    };
-  }
+var generationReducer = function generationReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_GENERATION;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
 
-  return {
-    generation: DEFAULT_GENERATION
-  };
+  switch (action.type) {
+    case _types.GENERATION.FETCH:
+      return state;
+
+    case _types.GENERATION.FETCH_ERROR:
+      return _extends({}, state, {
+        message: action.message
+      });
+
+    case _types.GENERATION.FETCH_SUCCESS:
+      return _extends({}, state, action.generation);
+
+    default:
+      return state;
+  }
 };
 
-exports.generationReducer = generationReducer;
-},{"../actions/types":"actions/types.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var _default = generationReducer;
+exports.default = _default;
+},{"../actions/types":"actions/types.js"}],"reducers/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _redux = require("redux");
+
+var _generation = _interopRequireDefault(require("./generation"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = (0, _redux.combineReducers)({
+  generation: _generation.default
+});
+
+exports.default = _default;
+},{"redux":"../node_modules/redux/es/redux.js","./generation":"reducers/generation.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -44179,14 +44210,15 @@ var _reactRedux = require("react-redux");
 
 var _reduxThunk = _interopRequireDefault(require("redux-thunk"));
 
-var _reducers = require("./reducers");
+var _reducers = _interopRequireDefault(require("./reducers"));
 
 require("./index.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Redux
-var store = (0, _redux.createStore)(_reducers.generationReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), (0, _redux.applyMiddleware)(_reduxThunk.default));
+var composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+var store = (0, _redux.createStore)(_reducers.default, composeEnhancer((0, _redux.applyMiddleware)(_reduxThunk.default)));
 (0, _reactDom.render)(_react.default.createElement(_reactRedux.Provider, {
   store: store
 }, _react.default.createElement("div", null, _react.default.createElement("h2", null, "Dragon Stack test"), _react.default.createElement(_Generation.default, null), _react.default.createElement(_Dragon.default, null))), document.getElementById('root'));

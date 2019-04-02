@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 //Redux
 import { connect } from 'react-redux';
-import { generationActionCreator } from '../actions/generation';
+import { fetchGeneration } from '../actions/generation';
 
 const MINIMUM_DELAY = 3000;
 

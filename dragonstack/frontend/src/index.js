@@ -7,14 +7,14 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 // Redux
-import { generationReducer } from './reducers';
+import rootReducer from './reducers';
 
 import './index.css';
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore( 
-  generationReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(thunk)
+  rootReducer,
+  composeEnhancer(applyMiddleware(thunk)),
   );
 
 render(
