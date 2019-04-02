@@ -28582,16 +28582,8 @@ function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Generation)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.timer = null, _this.fetchGeneration = function () {
-      fetch('http://localhost:3000/generation').then(function (res) {
-        return res.json();
-      }).then(function (json) {
-        return _this.props.dispatchGeneration(json.generation);
-      }).catch(function (err) {
-        return console.log(err);
-      });
-    }, _this.fetchNextGeneration = function () {
-      _this.fetchGeneration();
+    return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Generation)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.timer = null, _this.fetchNextGeneration = function () {
+      _this.props.fetchGeneration();
 
       var delay = new Date(_this.props.generation.expiration).getTime() - new Date().getTime();
 
@@ -28629,22 +28621,36 @@ function (_Component) {
 
 ;
 
+var fetchGeneration = function fetchGeneration() {
+  return function (dispatch) {
+    return fetch('http://localhost:3000/generation').then(function (res) {
+      return res.json();
+    }).then(function (res) {
+      dispatch((0, _generation.generationActionCreator)(res.generation));
+    }).catch(function (err) {
+      return console.log('error', err);
+    });
+  };
+};
+
 var mapStateToProps = function mapStateToProps(state) {
   var generation = state.generation;
   return {
     generation: generation
   };
-};
+}; // const mapDispatchToProps = dispatch => {
+//   return {
+//     dispatchGeneration: generation => dispatch(
+//       generationActionCreator(generation)
+//     ),
+//     fetchGeneration: () => fetchGeneration(dispatch)
+//   }
+// };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    dispatchGeneration: function dispatchGeneration(generation) {
-      return dispatch((0, _generation.generationActionCreator)(generation));
-    }
-  };
-};
 
-var componentConnector = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps);
+var componentConnector = (0, _reactRedux.connect)(mapStateToProps, {
+  fetchGeneration: fetchGeneration
+});
 
 var _default = componentConnector(Generation);
 
@@ -44015,7 +44021,35 @@ function (_Component) {
 ;
 var _default = Dragon;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","./DragonAvatar":"components/DragonAvatar.js"}],"reducers/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","./DragonAvatar":"components/DragonAvatar.js"}],"../node_modules/redux-thunk/es/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function createThunkMiddleware(extraArgument) {
+  return function (_ref) {
+    var dispatch = _ref.dispatch,
+        getState = _ref.getState;
+    return function (next) {
+      return function (action) {
+        if (typeof action === 'function') {
+          return action(dispatch, getState, extraArgument);
+        }
+
+        return next(action);
+      };
+    };
+  };
+}
+
+var thunk = createThunkMiddleware();
+thunk.withExtraArgument = createThunkMiddleware;
+var _default = thunk;
+exports.default = _default;
+},{}],"reducers/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44130,25 +44164,20 @@ var _Dragon = _interopRequireDefault(require("./components/Dragon"));
 
 var _reactRedux = require("react-redux");
 
-var _reducers = require("./reducers");
+var _reduxThunk = _interopRequireDefault(require("redux-thunk"));
 
-var _generation = require("./actions/generation");
+var _reducers = require("./reducers");
 
 require("./index.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Redux
-var store = (0, _redux.createStore)(_reducers.generationReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-fetch('http://localhost:3000/generation').then(function (res) {
-  return res.json();
-}).then(function (res) {
-  store.dispatch((0, _generation.generationActionCreator)(res.generation));
-});
+var store = (0, _redux.createStore)(_reducers.generationReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), (0, _redux.applyMiddleware)(_reduxThunk.default));
 (0, _reactDom.render)(_react.default.createElement(_reactRedux.Provider, {
   store: store
 }, _react.default.createElement("div", null, _react.default.createElement("h2", null, "Dragon Stack test"), _react.default.createElement(_Generation.default, null), _react.default.createElement(_Dragon.default, null))), document.getElementById('root'));
-},{"react":"../node_modules/react/index.js","redux":"../node_modules/redux/es/redux.js","react-dom":"../node_modules/react-dom/index.js","./components/Generation":"components/Generation.js","./components/Dragon":"components/Dragon.js","react-redux":"../node_modules/react-redux/es/index.js","./reducers":"reducers/index.js","./actions/generation":"actions/generation.js","./index.css":"index.css"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","redux":"../node_modules/redux/es/redux.js","react-dom":"../node_modules/react-dom/index.js","./components/Generation":"components/Generation.js","./components/Dragon":"components/Dragon.js","react-redux":"../node_modules/react-redux/es/index.js","redux-thunk":"../node_modules/redux-thunk/es/index.js","./reducers":"reducers/index.js","./index.css":"index.css"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -44176,7 +44205,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49294" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54030" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

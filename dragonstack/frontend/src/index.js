@@ -1,26 +1,21 @@
 import React from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { render } from 'react-dom';
 import Generation from './components/Generation';
 import Dragon from './components/Dragon';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 // Redux
 import { generationReducer } from './reducers';
-import { generationActionCreator } from './actions/generation';
-
 
 import './index.css';
 
 const store = createStore( 
   generationReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(thunk)
   );
-
-fetch('http://localhost:3000/generation')
-  .then(res => res.json())
-  .then(res => {store.dispatch(generationActionCreator(res.generation))});
-
 
 render(
   <Provider store={store}>
