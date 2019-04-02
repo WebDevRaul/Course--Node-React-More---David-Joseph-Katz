@@ -39,14 +39,6 @@ class Generation extends Component {
     )
   }
 };
-const fetchGeneration = () => dispatch => {
-  return fetch('http://localhost:3000/generation')
-    .then(res => res.json())
-    .then(res => {
-      dispatch(generationActionCreator(res.generation))
-    })
-    .catch(err => console.log('error', err));
-}
 
 const mapStateToProps = state => {
   const generation  = state.generation;

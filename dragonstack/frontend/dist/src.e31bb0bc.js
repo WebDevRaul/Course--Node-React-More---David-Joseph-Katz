@@ -28507,27 +28507,52 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.GENERATION_ACTION_TYPE = void 0;
-var GENERATION_ACTION_TYPE = 'GENERATION_ACTION_TYPE';
-exports.GENERATION_ACTION_TYPE = GENERATION_ACTION_TYPE;
+exports.GENERATION = void 0;
+var GENERATION = {
+  FETCH: 'GENERATION_FETCH',
+  FETCH_ERROR: 'GENERATION_FETCH_ERROR',
+  FETCH_SUCCESS: 'GENERATION_FETCH_SUCCESS'
+};
+exports.GENERATION = GENERATION;
 },{}],"actions/generation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.generationActionCreator = void 0;
+exports.fetchGeneration = void 0;
 
 var _types = require("./types");
 
-var generationActionCreator = function generationActionCreator(payload) {
-  return {
-    type: _types.GENERATION_ACTION_TYPE,
-    generation: payload
+var fetchGeneration = function fetchGeneration() {
+  return function (dispatch) {
+    dispatch({
+      type: _types.GENERATION.FETCH
+    });
+    return fetch('http://localhost:3000/generation').then(function (res) {
+      return res.json();
+    }).then(function (res) {
+      if (res.type === 'error') {
+        dispatch({
+          type: _types.GENERATION.FETCH_ERROR,
+          message: res.message
+        });
+      } else {
+        dispatch({
+          type: _types.GENERATION.FETCH_SUCCESS,
+          generation: res.generation
+        });
+      }
+    }).catch(function (err) {
+      return dispatch({
+        type: _types.GENERATION.FETCH_ERROR,
+        message: err.message
+      });
+    });
   };
 };
 
-exports.generationActionCreator = generationActionCreator;
+exports.fetchGeneration = fetchGeneration;
 },{"./types":"actions/types.js"}],"components/Generation.js":[function(require,module,exports) {
 "use strict";
 
@@ -28620,18 +28645,6 @@ function (_Component) {
 }(_react.Component);
 
 ;
-
-var fetchGeneration = function fetchGeneration() {
-  return function (dispatch) {
-    return fetch('http://localhost:3000/generation').then(function (res) {
-      return res.json();
-    }).then(function (res) {
-      dispatch((0, _generation.generationActionCreator)(res.generation));
-    }).catch(function (err) {
-      return console.log('error', err);
-    });
-  };
-};
 
 var mapStateToProps = function mapStateToProps(state) {
   var generation = state.generation;
