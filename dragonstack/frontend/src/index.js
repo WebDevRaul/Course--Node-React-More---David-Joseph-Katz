@@ -3,16 +3,20 @@ import { createStore } from 'redux';
 import { render } from 'react-dom';
 import Generation from './components/Generation';
 import Dragon from './components/Dragon';
+import { generationReducer } from './reducers';
+import { generationActionCreator } from './actions/generation';
 
 import './index.css';
 
-const DEFAULT_GENERATION = {getElementById: '', expiration: ''}
+const store = createStore( 
+  generationReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
 
-const generationReducer = () => {
-  return { generation: DEFAULT_GENERATION }
-}
+fetch('http://localhost:3000/generation')
+  .then(res => res.json())
+  .then(res => {store.dispatch(generationActionCreator(res.generation))});
 
-const store = createStore( generationReducer );
 
 render(
   <div>
