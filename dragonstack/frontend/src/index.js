@@ -3,8 +3,12 @@ import { createStore } from 'redux';
 import { render } from 'react-dom';
 import Generation from './components/Generation';
 import Dragon from './components/Dragon';
+import { Provider } from 'react-redux';
+
+// Redux
 import { generationReducer } from './reducers';
 import { generationActionCreator } from './actions/generation';
+
 
 import './index.css';
 
@@ -19,10 +23,12 @@ fetch('http://localhost:3000/generation')
 
 
 render(
-  <div>
-    <h2>Dragon Stack test</h2>
-    <Generation />
-    <Dragon />
-  </div>,
+  <Provider store={store}>
+    <div>
+      <h2>Dragon Stack test</h2>
+      <Generation />
+      <Dragon />
+    </div>
+  </Provider>,
   document.getElementById('root')
 );
