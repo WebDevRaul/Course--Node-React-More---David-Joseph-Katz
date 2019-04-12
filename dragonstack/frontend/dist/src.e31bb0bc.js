@@ -26427,7 +26427,20 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"../node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"reducers/fetchState.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  fetching: 'fetching',
+  error: 'error',
+  success: 'success'
+};
+exports.default = _default;
+},{}],"../node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28563,9 +28576,13 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _fetchState = _interopRequireDefault(require("../reducers/fetchState"));
+
 var _reactRedux = require("react-redux");
 
 var _generation = require("../actions/generation");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -28637,6 +28654,11 @@ function (_Component) {
     key: "render",
     value: function render() {
       var generation = this.props.generation;
+
+      if (generation.status === _fetchState.default.error) {
+        return _react.default.createElement("div", null, generation.message);
+      }
+
       return _react.default.createElement("div", null, _react.default.createElement("h3", null, "Generation ", generation.generationId, ". Expires on: "), _react.default.createElement("h4", null, new Date(generation.expiration).toString()));
     }
   }]);
@@ -28668,7 +28690,7 @@ var componentConnector = (0, _reactRedux.connect)(mapStateToProps, {
 var _default = componentConnector(Generation);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/generation":"actions/generation.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../reducers/fetchState":"reducers/fetchState.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/generation":"actions/generation.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
 var define;
 /*!
   Copyright (c) 2017 Jed Watson.
@@ -44072,7 +44094,11 @@ exports.default = void 0;
 
 var _types = require("../actions/types");
 
+var _fetchState = _interopRequireDefault(require("./fetchState"));
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DEFAULT_GENERATION = {
   generationId: '',
@@ -44085,15 +44111,20 @@ var generationReducer = function generationReducer() {
 
   switch (action.type) {
     case _types.GENERATION.FETCH:
-      return state;
+      return _extends({}, state, {
+        status: _fetchState.default.fetching
+      });
 
     case _types.GENERATION.FETCH_ERROR:
       return _extends({}, state, {
+        status: _fetchState.default.error,
         message: action.message
       });
 
     case _types.GENERATION.FETCH_SUCCESS:
-      return _extends({}, state, action.generation);
+      return _extends({}, state, {
+        status: _fetchState.default.success
+      }, action.generation);
 
     default:
       return state;
@@ -44102,7 +44133,7 @@ var generationReducer = function generationReducer() {
 
 var _default = generationReducer;
 exports.default = _default;
-},{"../actions/types":"actions/types.js"}],"reducers/index.js":[function(require,module,exports) {
+},{"../actions/types":"actions/types.js","./fetchState":"reducers/fetchState.js"}],"reducers/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44250,7 +44281,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54030" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55931" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

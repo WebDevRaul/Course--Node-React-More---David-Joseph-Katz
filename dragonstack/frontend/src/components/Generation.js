@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import fetchState from '../reducers/fetchState';
 
 //Redux
 import { connect } from 'react-redux';
@@ -31,6 +32,9 @@ class Generation extends Component {
 
   render() {
     const { generation } = this.props;
+    if (generation.status === fetchState.error) {
+      return <div>{generation.message}</div>;
+    }
     return (
       <div>
         <h3>Generation {generation.generationId}. Expires on: </h3>
