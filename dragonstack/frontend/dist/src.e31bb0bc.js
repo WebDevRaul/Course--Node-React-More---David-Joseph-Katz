@@ -28520,13 +28520,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.GENERATION = void 0;
+exports.DRAGON = exports.GENERATION = void 0;
 var GENERATION = {
   FETCH: 'GENERATION_FETCH',
   FETCH_ERROR: 'GENERATION_FETCH_ERROR',
   FETCH_SUCCESS: 'GENERATION_FETCH_SUCCESS'
 };
 exports.GENERATION = GENERATION;
+var DRAGON = {
+  FETCH: 'DRAGON_FETCH',
+  FETCH_ERROR: 'DRAGON_FETCH_ERROR',
+  FETCH_SUCCESS: 'DRAGON_FETCH_SUCCESS'
+};
+exports.DRAGON = DRAGON;
 },{}],"actions/generation.js":[function(require,module,exports) {
 "use strict";
 
@@ -44133,6 +44139,58 @@ var generationReducer = function generationReducer() {
 
 var _default = generationReducer;
 exports.default = _default;
+},{"../actions/types":"actions/types.js","./fetchState":"reducers/fetchState.js"}],"reducers/dragon.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _types = require("../actions/types");
+
+var _fetchState = _interopRequireDefault(require("./fetchState"));
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var DEFAULT_DRAGON = {
+  generationId: '',
+  dragonID: '',
+  nickname: '',
+  birthdate: '',
+  traits: []
+};
+
+var dragon = function dragon() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_DRAGON;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _types.DRAGON.FETCH:
+      return _extends({}, state, {
+        status: _fetchState.default.fetching
+      });
+
+    case _types.DRAGON.FETCH_ERROR:
+      return _extends({}, state, {
+        status: _fetchState.default.error,
+        message: action.message
+      });
+
+    case _types.DRAGON.FETCH_SUCCESS:
+      return _extends({}, state, {
+        status: _fetchState.default.success
+      }, action.dragon);
+
+    default:
+      return state;
+  }
+};
+
+var _default = dragon;
+exports.default = _default;
 },{"../actions/types":"actions/types.js","./fetchState":"reducers/fetchState.js"}],"reducers/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -44145,14 +44203,17 @@ var _redux = require("redux");
 
 var _generation = _interopRequireDefault(require("./generation"));
 
+var _dragon = _interopRequireDefault(require("./dragon"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = (0, _redux.combineReducers)({
-  generation: _generation.default
+  generation: _generation.default,
+  dragon: _dragon.default
 });
 
 exports.default = _default;
-},{"redux":"../node_modules/redux/es/redux.js","./generation":"reducers/generation.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"redux":"../node_modules/redux/es/redux.js","./generation":"reducers/generation.js","./dragon":"reducers/dragon.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
