@@ -13,6 +13,19 @@ class AccountTable {
       );
     });
   }
+
+  static getAccount({ usernameHash }) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        'SELECT id, "passwordHash" FROM account WHERE "usernameHash" = $1',
+        [usernameHash],
+        (err, response) => {
+          if(err) return reject(err);
+          resolve({ account: response.rows[0] });
+        }
+      )
+    });
+  }
 }
 
 module.exports = AccountTable;

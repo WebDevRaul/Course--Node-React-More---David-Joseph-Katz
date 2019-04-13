@@ -10,10 +10,35 @@ router
     const usernameHash = hash(username);
     const passwordHash = hash(password);
 
-    AccountTable.storeAccount({ usernameHash, passwordHash })
+    AccountTable.getAccount({ usernameHash })
+      .then(({ account }) => {
+        if(!account) {
+          return AccountTable.storeAccount({ usernameHash, passwordHash })
+        } else {
+          const err = new Error('This username has been allready been taken');
+          err.statusCode = 409;
+
+          throw err;
+        }
+      })
       .then(() => res.json({ message: 'success!' }))
       .catch(err => next(err));
   });
+
+  // AccountTable.getAccount({ usernameHash })
+  // .then(({ account }) => {
+  //   if(!account) {
+  //     AccountTable.storeAccount({ usernameHash, passwordHash })
+  //       .then(() => res.json({ message: 'success!' }))
+  //       .catch(err => next(err));
+  //   } else {
+  //     const err = new Error('This username has been allready been taken');
+  //     err.statusCode = 409;
+
+  //     next(err);
+  //   }
+  // })
+  // .catch(err => next(err));
 
 
 module.exports = router
