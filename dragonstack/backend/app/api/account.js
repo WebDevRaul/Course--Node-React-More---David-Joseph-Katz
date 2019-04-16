@@ -46,5 +46,22 @@ router
   // })
   // .catch(err => next(err));
 
+  router
+    .post('/login', (req, res, next) => {
+      const { username, password } = req.body;
+
+      AccountTable.getAccount({ usernameHash: hash(username) })
+        .then(({ account }) => {
+          if(account && account.passwordHash === hash(password)) {
+            return setSession({ username, res })
+          }else{
+            const err = new Error('Incorect username/password');
+            err.statusCode = 409;
+            throw err;
+          }
+        })
+        .then(({ message }) => res.json({ message }))
+        .catch(err => next(err));
+    });
 
 module.exports = router
