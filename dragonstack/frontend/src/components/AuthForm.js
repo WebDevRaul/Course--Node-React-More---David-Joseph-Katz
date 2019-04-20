@@ -3,6 +3,22 @@ import { Button, FormGroup, FormControl } from 'react-bootstrap';
 
 class AuthForm extends Component {
   state = { username: '', password: '' };
+
+  updateUsername = e => {
+    this.setState({ username: e.target.value })
+  };
+  updatePassword = e => {
+    this.setState({ password: e.target.value })
+  };
+  
+  signup = () => {
+    console.log('signup')
+  }
+
+  login = () => {
+    console.log('login')
+  }
+   
   render() {
     return (
       <div>
@@ -12,6 +28,7 @@ class AuthForm extends Component {
             type='text'
             value={this.state.username}
             placeholder='username'
+            onChange={this.updateUsername}
           />
         </FormGroup>
         <FormGroup>
@@ -19,12 +36,13 @@ class AuthForm extends Component {
             type='password'
             value={this.state.password}
             placeholder='password'
+            onChange={this.updatePassword}
           />
         </FormGroup>
         <div>
-          <Button>Log In</Button>
+          <Button onClick={this.login} >Log In</Button>
           <span> or </span>
-          <Button>Sign Up</Button>
+          <Button onClick={this.signup} >Sign Up</Button>
         </div>
       </div>
     )

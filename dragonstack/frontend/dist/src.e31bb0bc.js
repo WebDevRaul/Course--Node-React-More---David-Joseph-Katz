@@ -44235,6 +44235,18 @@ function (_Component) {
     return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(AuthForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
       username: '',
       password: ''
+    }, _this.updateUsername = function (e) {
+      _this.setState({
+        username: e.target.value
+      });
+    }, _this.updatePassword = function (e) {
+      _this.setState({
+        password: e.target.value
+      });
+    }, _this.signup = function () {
+      console.log('signup');
+    }, _this.login = function () {
+      console.log('login');
     }, _temp));
   }
 
@@ -44244,12 +44256,18 @@ function (_Component) {
       return _react.default.createElement("div", null, _react.default.createElement("h2", null, "Dragon Stack"), _react.default.createElement(_reactBootstrap.FormGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
         type: "text",
         value: this.state.username,
-        placeholder: "username"
+        placeholder: "username",
+        onChange: this.updateUsername
       })), _react.default.createElement(_reactBootstrap.FormGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
         type: "password",
         value: this.state.password,
-        placeholder: "password"
-      })), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Button, null, "Log In"), _react.default.createElement("span", null, " or "), _react.default.createElement(_reactBootstrap.Button, null, "Sign Up")));
+        placeholder: "password",
+        onChange: this.updatePassword
+      })), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Button, {
+        onClick: this.login
+      }, "Log In"), _react.default.createElement("span", null, " or "), _react.default.createElement(_reactBootstrap.Button, {
+        onClick: this.signup
+      }, "Sign Up")));
     }
   }]);
 
