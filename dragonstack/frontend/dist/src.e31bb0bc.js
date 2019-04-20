@@ -44192,6 +44192,8 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactBootstrap = require("react-bootstrap");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -44218,15 +44220,36 @@ function (_Component) {
   _inherits(AuthForm, _Component);
 
   function AuthForm() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    var _temp;
+
     _classCallCheck(this, AuthForm);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(AuthForm).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(AuthForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+      username: '',
+      password: ''
+    }, _temp));
   }
 
   _createClass(AuthForm, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null);
+      return _react.default.createElement("div", null, _react.default.createElement("h2", null, "Dragon Stack"), _react.default.createElement(_reactBootstrap.FormGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
+        type: "text",
+        value: this.state.username,
+        placeholder: "username"
+      })), _react.default.createElement(_reactBootstrap.FormGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
+        type: "password",
+        value: this.state.password,
+        placeholder: "password"
+      })), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Button, null, "Log In"), _react.default.createElement("span", null, " or "), _react.default.createElement(_reactBootstrap.Button, null, "Sign Up")));
     }
   }]);
 
@@ -44235,7 +44258,7 @@ function (_Component) {
 
 var _default = AuthForm;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/Root.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js"}],"components/Root.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44285,7 +44308,7 @@ function (_Component) {
   _createClass(Root, [{
     key: "render",
     value: function render() {
-      return true ? _react.default.createElement(_Home.default, null) : _react.default.createElement(_AuthForm.default, null);
+      return false ? _react.default.createElement(_Home.default, null) : _react.default.createElement(_AuthForm.default, null);
     }
   }]);
 
