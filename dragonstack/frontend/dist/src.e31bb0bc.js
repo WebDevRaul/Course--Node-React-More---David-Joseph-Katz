@@ -44188,7 +44188,61 @@ function (_Component) {
 
 var _default = Home;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./Generation":"components/Generation.js","./Dragon":"components/Dragon.js"}],"components/AuthForm.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Generation":"components/Generation.js","./Dragon":"components/Dragon.js"}],"actions/account.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.signup = void 0;
+
+var _types = require("./types");
+
+var _config = require("../config");
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var signup = function signup(_ref) {
+  var username = _ref.username,
+      password = _ref.password;
+  return function (dispatch) {
+    dispatch({
+      type: _types.ACCOUNT.FETCH
+    });
+    return fetch("".concat(_config.BACKEND.ADDRESS, "/account/signup"), {
+      method: 'POST',
+      body: JSON.stringify({
+        username: username,
+        password: password
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    }).then(function (res) {
+      return res.json();
+    }).then(function (json) {
+      if (json.type === 'error') {
+        dispatch({
+          type: _types.ACCOUNT.FETCH_ERROR,
+          message: json.message
+        });
+      } else {
+        dispatch(_extends({
+          type: _types.ACCOUNT.FETCH_SUCCESS
+        }, json));
+      }
+    }).catch(function (err) {
+      return dispatch({
+        type: _types.ACCOUNT.FETCH_ERROR,
+        message: err.message
+      });
+    });
+  };
+};
+
+exports.signup = signup;
+},{"./types":"actions/types.js","../config":"config.js"}],"components/AuthForm.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44198,7 +44252,11 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRedux = require("react-redux");
+
 var _reactBootstrap = require("react-bootstrap");
+
+var _account = require("../actions/account");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -44250,7 +44308,14 @@ function (_Component) {
         password: e.target.value
       });
     }, _this.signup = function () {
-      console.log('signup');
+      var _this$state = _this.state,
+          username = _this$state.username,
+          password = _this$state.password;
+
+      _this.props.signup({
+        username: username,
+        password: password
+      });
     }, _this.login = function () {
       console.log('login');
     }, _temp));
@@ -44280,9 +44345,14 @@ function (_Component) {
   return AuthForm;
 }(_react.Component);
 
-var _default = AuthForm;
+;
+
+var _default = (0, _reactRedux.connect)(null, {
+  signup: _account.signup
+})(AuthForm);
+
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js"}],"components/Root.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","../actions/account":"actions/account.js"}],"components/Root.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44645,7 +44715,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64553" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56360" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
