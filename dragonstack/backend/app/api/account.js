@@ -6,79 +6,62 @@ const { setSession } = require('./helper');
 
 const router = new Router();
 
-router
-  .post('/signup', (req, res, next) => {
-    const { username, password } = req.body;
-    const usernameHash = hash(username);
-    const passwordHash = hash(password);
+router.post('/signup', (req, res, next) => {
+  const { username, password } = req.body;
+  const usernameHash = hash(username);
+  const passwordHash = hash(password);
 
-    AccountTable.getAccount({ usernameHash })
-      .then(({ account }) => {
-        if(!account) {
-          return AccountTable.storeAccount({ usernameHash, passwordHash })
-        } else {
-          const err = new Error('This username has been allready been taken');
-          err.statusCode = 409;
+  AccountTable.getAccount({ usernameHash })
+    .then(({ account }) => {
+      if (!account) {
+        return AccountTable.storeAccount({ usernameHash, passwordHash })
+      } else {
+        const error = new Error('This username has already been taken');
 
-          throw err;
-        }
-      })
-      .then(() => {
-        return setSession({ username, res });
-      })
-      .then(({ message }) => {
-        res.json({ message });
-      })
-      .catch(err => next(err));
-  });
+        error.statusCode = 409;
 
-  // AccountTable.getAccount({ usernameHash })
-  // .then(({ account }) => {
-  //   if(!account) {
-  //     AccountTable.storeAccount({ usernameHash, passwordHash })
-  //       .then(() => res.json({ message: 'success!' }))
-  //       .catch(err => next(err));
-  //   } else {
-  //     const err = new Error('This username has been allready been taken');
-  //     err.statusCode = 409;
+        throw error;
+      }
+    })
+    .then(() => {
+      return setSession({ username, res });
+    })
+    .then(({ message }) => res.json({ message }))
+    .catch(error => next(error));
+});
 
-  //     next(err);
-  //   }
-  // })
-  // .catch(err => next(err));
+router.post('/login', (req, res, next) => {
+  const { username, password } = req.body;
 
-  router
-    .post('/login', (req, res, next) => {
-      const { username, password } = req.body;
+  AccountTable.getAccount({ usernameHash: hash(username) })
+    .then(({ account }) => {
+      if (account && account.passwordHash === hash(password)) {
+        const { sessionId } = account;
+      
+        return setSession({ username, res, sessionId })
+      } else {
+        const error = new Error('Incorrect username/password');
 
-      AccountTable.getAccount({ usernameHash: hash(username) })
-        .then(({ account }) => {
-          if(account && account.passwordHash === hash(password)) {
-            const { sessionId } = account;
-            return setSession({ username, res, sessionId })
-          }else{
-            const err = new Error('Incorect username/password');
-            err.statusCode = 409;
-            throw err;
-          }
-        })
-        .then(({ message }) => res.json({ message }))
-        .catch(err => next(err));
-    });
-  
-  router
-    .get('/logout', (req, res, next) => {
-      const { username } = Session.parse(req.cookies.sessionString);
+        error.statusCode = 409;
 
-      AccountTable.updateSessionId({
-        sessionId: null,
-        usernameHash: hash(username)
-      })
-      .then(() => {
-        res.clearCookie('sessionString');
-        res.json({ message: 'Successful logout' });
-      })
-      .catch(err => next(err));
-    });
+        throw error;
+      }
+    })
+    .then(({ message }) => res.json({ message }))
+    .catch(error => next(error));
+});
 
-module.exports = router
+router.get('/logout', (req, res, next) => {
+  const { username } = Session.parse(req.cookies.sessionString);
+
+  AccountTable.updateSessionId({
+    sessionId: null,
+    usernameHash: hash(username)
+  }).then(() => {
+    res.clearCookie('sessionString');
+
+    res.json({ message: 'Successful logout' });
+  }).catch(error => next(error));
+});
+
+module.exports = router;

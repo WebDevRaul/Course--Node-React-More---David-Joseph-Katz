@@ -8,31 +8,34 @@ const setSession = ({ username, res, sessionId }) => {
 
     if (sessionId) {
       sessionString = Session.sessionString({ username, id: sessionId });
+
       setSessionCookie({ sessionString, res });
-      resolve({ message: 'session restore' });
+
+      resolve({ message: 'session restored' });
     } else {
       session = new Session({ username });
       sessionString = session.toString();
 
-      AccountTable.updateSessionId({ 
-        sessionId: session.id, 
+      AccountTable.updateSessionId({
+        sessionId: session.id,
         usernameHash: hash(username)
       })
       .then(() => {
-        setSessionCookie(sessionString, res);
-        resolve({ message: 'session created' })
+        setSessionCookie({ sessionString, res });
+
+        resolve({ message: 'session created { noSessionId }' });
       })
-      .catch(err => reject(err));
+      .catch(error => reject(error));
     }
   });
-};
+}
 
 const setSessionCookie = ({ sessionString, res }) => {
   res.cookie('sessionString', sessionString, {
     expire: Date.now() + 3600000,
-    httpOnly: true,
+    httpOnly: true
     // secure: true // use with https
   });
-}
+};
 
 module.exports = { setSession };

@@ -1,13 +1,15 @@
 const pool = require('../../databasePool');
 
 class AccountTable {
-  static storeAccount({usernameHash, passwordHash}) {
+  static storeAccount({ usernameHash, passwordHash }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        'INSERT INTO account("usernameHash", "passwordHash") VALUES($1, $2)',
+        `INSERT INTO account("usernameHash", "passwordHash")
+         VALUES($1, $2)`,
         [usernameHash, passwordHash],
-        (err, res) => {
-          if(err) return reject(err);
+        (error, response) => {
+          if (error) return reject(error);
+
           resolve();
         }
       );
@@ -17,10 +19,12 @@ class AccountTable {
   static getAccount({ usernameHash }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        'SELECT id, "passwordHash", "sessionId" FROM account WHERE "usernameHash" = $1',
+        `SELECT id, "passwordHash", "sessionId" FROM account
+         WHERE "usernameHash" = $1`,
         [usernameHash],
-        (err, response) => {
-          if(err) return reject(err);
+        (error, response) => {
+          if (error) return reject(error);
+
           resolve({ account: response.rows[0] });
         }
       )
@@ -32,13 +36,14 @@ class AccountTable {
       pool.query(
         'UPDATE account SET "sessionId" = $1 WHERE "usernameHash" = $2',
         [sessionId, usernameHash],
-        (err, response) => {
-          if(err) return reject(err);
+        (error, response) => {
+          if (error) return reject(error);
+
           resolve();
         }
       )
-    })
-  };
+    });
+  }
 }
 
 module.exports = AccountTable;
