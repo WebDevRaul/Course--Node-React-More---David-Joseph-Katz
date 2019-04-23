@@ -28564,7 +28564,8 @@ exports.DRAGON = DRAGON;
 var ACCOUNT = {
   FETCH: 'ACCOUNT_FETCH',
   FETCH_ERROR: 'ACCOUNT_FETCH_ERROR',
-  FETCH_SUCCESS: 'ACCOUNT_FETCH_SUCCESS'
+  FETCH_SUCCESS: 'ACCOUNT_FETCH_SUCCESS',
+  FETCH_LOGOUT_SUCCESS: 'ACCOUNT_FETCH_LOGOUT_SUCCESS'
 };
 exports.ACCOUNT = ACCOUNT;
 },{}],"config.js":[function(require,module,exports) {
@@ -44581,6 +44582,13 @@ var account = function account() {
         status: _fetchState.default.success,
         message: action.message,
         loggedIn: true
+      });
+
+    case FETCH_LOGOUT_SUCCESS:
+      return _extends({}, state, {
+        status: _fetchState.default.success,
+        message: action.message,
+        loggedIn: false
       });
 
     default:
