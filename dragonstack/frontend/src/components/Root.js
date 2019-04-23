@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 // Componets
 import Home from './Home';
@@ -7,9 +8,13 @@ import AuthForm from './AuthForm';
 class Root extends Component {
   render() {
     return (
-      false ? <Home /> : <AuthForm />
+      this.props.account.loggedIn ? <Home /> : <AuthForm />
     )
   }
-}
+};
 
-export default Root;
+const mapStateToProps = state => ({
+  account: state.account
+});
+
+export default connect( mapStateToProps, {} )(Root);

@@ -44258,6 +44258,10 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _account = require("../actions/account");
 
+var _fetchState = _interopRequireDefault(require("../reducers/fetchState"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -44338,7 +44342,14 @@ function (_Component) {
         onClick: this.login
       }, "Log In"), _react.default.createElement("span", null, " or "), _react.default.createElement(_reactBootstrap.Button, {
         onClick: this.signup
-      }, "Sign Up")));
+      }, "Sign Up")), _react.default.createElement("br", null), this.Error);
+    }
+  }, {
+    key: "Error",
+    get: function get() {
+      if (this.props.account.status === _fetchState.default.error) {
+        return _react.default.createElement("div", null, this.props.account.message);
+      }
     }
   }]);
 
@@ -44347,12 +44358,18 @@ function (_Component) {
 
 ;
 
-var _default = (0, _reactRedux.connect)(null, {
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    account: state.account
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
   signup: _account.signup
 })(AuthForm);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","../actions/account":"actions/account.js"}],"components/Root.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","../actions/account":"actions/account.js","../reducers/fetchState":"reducers/fetchState.js"}],"components/Root.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44361,6 +44378,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
+
+var _reactRedux = require("react-redux");
 
 var _Home = _interopRequireDefault(require("./Home"));
 
@@ -44402,16 +44421,25 @@ function (_Component) {
   _createClass(Root, [{
     key: "render",
     value: function render() {
-      return false ? _react.default.createElement(_Home.default, null) : _react.default.createElement(_AuthForm.default, null);
+      return this.props.account.loggedIn ? _react.default.createElement(_Home.default, null) : _react.default.createElement(_AuthForm.default, null);
     }
   }]);
 
   return Root;
 }(_react.Component);
 
-var _default = Root;
+;
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    account: state.account
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, {})(Root);
+
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./Home":"components/Home.js","./AuthForm":"components/AuthForm.js"}],"reducers/generation.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","./Home":"components/Home.js","./AuthForm":"components/AuthForm.js"}],"reducers/generation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44715,7 +44743,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63547" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54021" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
