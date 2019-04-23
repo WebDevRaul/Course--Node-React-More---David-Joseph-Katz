@@ -9,6 +9,7 @@ import Root from './components/Root';
 
 // Redux
 import rootReducer from './reducers';
+import { fetchAuthenticated } from './actions/account';
 
 import './index.css';
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -18,9 +19,12 @@ const store = createStore(
   composeEnhancer(applyMiddleware(thunk)),
   );
 
-render(
-  <Provider store={store}>
-    <Root />
-  </Provider>,
-  document.getElementById('root')
-);
+store.dispatch(fetchAuthenticated())
+  .then(() => {
+    render(
+      <Provider store={store}>
+        <Root />
+      </Provider>,
+      document.getElementById('root')
+    );
+  });
