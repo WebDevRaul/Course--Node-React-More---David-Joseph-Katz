@@ -20,7 +20,7 @@ const account = (state = DEFAULT_ACCOUNT, action) => {
         message: action.message,
         loggedIn: true
       }
-    case FETCH_LOGOUT_SUCCESS:
+    case ACCOUNT.FETCH_LOGOUT_SUCCESS:
       return {
         ...state,
         status: fetchStates.success,
