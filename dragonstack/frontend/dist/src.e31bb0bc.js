@@ -44195,7 +44195,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.signup = void 0;
+exports.logout = exports.signup = void 0;
 
 var _types = require("./types");
 
@@ -44203,24 +44203,15 @@ var _config = require("../config");
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var signup = function signup(_ref) {
-  var username = _ref.username,
-      password = _ref.password;
+var fetchFromAccount = function fetchFromAccount(_ref) {
+  var endpoint = _ref.endpoint,
+      options = _ref.options,
+      SUCCESS_TYPE = _ref.SUCCESS_TYPE;
   return function (dispatch) {
     dispatch({
       type: _types.ACCOUNT.FETCH
     });
-    return fetch("".concat(_config.BACKEND.ADDRESS, "/account/signup"), {
-      method: 'POST',
-      body: JSON.stringify({
-        username: username,
-        password: password
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include'
-    }).then(function (res) {
+    return fetch("".concat(_config.BACKEND.ADDRESS, "/account/").concat(endpoint), options).then(function (res) {
       return res.json();
     }).then(function (json) {
       if (json.type === 'error') {
@@ -44230,7 +44221,7 @@ var signup = function signup(_ref) {
         });
       } else {
         dispatch(_extends({
-          type: _types.ACCOUNT.FETCH_SUCCESS
+          type: SUCCESS_TYPE
         }, json));
       }
     }).catch(function (err) {
@@ -44242,7 +44233,41 @@ var signup = function signup(_ref) {
   };
 };
 
+var signup = function signup(_ref2) {
+  var username = _ref2.username,
+      password = _ref2.password;
+  return fetchFromAccount({
+    endpoint: 'signup',
+    options: {
+      method: 'POST',
+      body: JSON.stringify({
+        username: username,
+        password: password
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    },
+    SUCCESS_TYPE: _types.ACCOUNT.FETCH_SUCCESS
+  });
+};
+
 exports.signup = signup;
+
+var logout = function logout() {
+  return function (dispatch) {
+    return fetchFromAccount({
+      endpoint: 'logout',
+      options: {
+        credentials: 'include'
+      },
+      SUCCESS_TYPE: _types.ACCOUNT.FETCH_LOGOUT_SUCCESS
+    });
+  };
+};
+
+exports.logout = logout;
 },{"./types":"actions/types.js","../config":"config.js"}],"components/AuthForm.js":[function(require,module,exports) {
 "use strict";
 
