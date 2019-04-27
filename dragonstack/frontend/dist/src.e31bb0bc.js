@@ -44030,7 +44030,9 @@ var fetchDragon = function fetchDragon() {
     dispatch({
       type: _types.DRAGON.FETCH
     });
-    return fetch("".concat(_config.BACKEND.ADDRESS, "/dragon/new")).then(function (res) {
+    return fetch("".concat(_config.BACKEND.ADDRESS, "/dragon/new"), {
+      credentials: 'include'
+    }).then(function (res) {
       return res.json();
     }).then(function (res) {
       if (res.type === 'error') {
