@@ -44375,7 +44375,8 @@ function (_Component) {
 
     return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(AuthForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
       username: '',
-      password: ''
+      password: '',
+      buttonClicked: false
     }, _this.updateUsername = function (e) {
       _this.setState({
         username: e.target.value
@@ -44385,6 +44386,10 @@ function (_Component) {
         password: e.target.value
       });
     }, _this.signup = function () {
+      _this.setState({
+        buttonClicked: true
+      });
+
       var _this$state = _this.state,
           username = _this$state.username,
           password = _this$state.password;
@@ -44394,6 +44399,10 @@ function (_Component) {
         password: password
       });
     }, _this.login = function () {
+      _this.setState({
+        buttonClicked: true
+      });
+
       var _this$state2 = _this.state,
           username = _this$state2.username,
           password = _this$state2.password;
@@ -44427,7 +44436,7 @@ function (_Component) {
   }, {
     key: "Error",
     get: function get() {
-      if (this.props.account.status === _fetchState.default.error) {
+      if (this.state.buttonClicked && this.props.account.status === _fetchState.default.error) {
         return _react.default.createElement("div", null, this.props.account.message);
       }
     }
@@ -44842,7 +44851,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54021" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64556" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
