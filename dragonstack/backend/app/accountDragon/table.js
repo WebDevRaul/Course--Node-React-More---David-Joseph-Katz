@@ -16,8 +16,4 @@ class AccountDragonTable {
   }
 }
 
-AccountDragonTable.storeAccountDragon({
-  accountId: 1, dragonId: 3
-}).then(() => console.log('stored')).catch(error => console.log(error, 'error'))
-
 module.exports = AccountDragonTable;
