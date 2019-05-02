@@ -44311,6 +44311,13 @@ function (_Component) {
 }(_react.Component);
 
 ;
+fetch('http://localhost:3000/account/dragons', {
+  credentials: 'include'
+}).then(function (response) {
+  return response.json();
+}).then(function (json) {
+  return console.log('account dragons', json);
+});
 
 var _default = (0, _reactRedux.connect)(null, {
   logout: _account.logout
@@ -44853,7 +44860,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64556" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59634" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
