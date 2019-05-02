@@ -28548,7 +28548,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ACCOUNT = exports.DRAGON = exports.GENERATION = void 0;
+exports.ACCOUNT_DRAGONS = exports.ACCOUNT = exports.DRAGON = exports.GENERATION = void 0;
 var GENERATION = {
   FETCH: 'GENERATION_FETCH',
   FETCH_ERROR: 'GENERATION_FETCH_ERROR',
@@ -28569,6 +28569,12 @@ var ACCOUNT = {
   FETCH_AUTHENTICATED_SUCCESS: 'ACCOUNT_FETCH_AUTHENTICATED_SUCCESS'
 };
 exports.ACCOUNT = ACCOUNT;
+var ACCOUNT_DRAGONS = {
+  FETCH: 'ACCOUNT_DRAGON_FETCH',
+  FETCH_ERROR: 'ACCOUNT_DRAGON_FETCH_ERROR',
+  FETCH_SUCCESS: 'ACCOUNT_DRAGON_FETCH_SUCCESS'
+};
+exports.ACCOUNT_DRAGONS = ACCOUNT_DRAGONS;
 },{}],"config.js":[function(require,module,exports) {
 "use strict";
 
@@ -44139,7 +44145,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchAuthenticated = exports.logout = exports.login = exports.signup = void 0;
+exports.fetchAuthenticated = exports.logout = exports.login = exports.signup = exports.fetchFromAccount = void 0;
 
 var _types = require("./types");
 
@@ -44150,17 +44156,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var fetchFromAccount = function fetchFromAccount(_ref) {
   var endpoint = _ref.endpoint,
       options = _ref.options,
+      FETCH_TYPE = _ref.FETCH_TYPE,
+      ERROR_TYPE = _ref.ERROR_TYPE,
       SUCCESS_TYPE = _ref.SUCCESS_TYPE;
   return function (dispatch) {
     dispatch({
-      type: _types.ACCOUNT.FETCH
+      type: FETCH_TYPE
     });
     return fetch("".concat(_config.BACKEND.ADDRESS, "/account/").concat(endpoint), options).then(function (res) {
       return res.json();
     }).then(function (json) {
       if (json.type === 'error') {
         dispatch({
-          type: _types.ACCOUNT.FETCH_ERROR,
+          type: ERROR_TYPE,
           message: json.message
         });
       } else {
@@ -44170,12 +44178,14 @@ var fetchFromAccount = function fetchFromAccount(_ref) {
       }
     }).catch(function (err) {
       return dispatch({
-        type: _types.ACCOUNT.FETCH_ERROR,
+        type: ERROR_TYPE,
         message: err.message
       });
     });
   };
 };
+
+exports.fetchFromAccount = fetchFromAccount;
 
 var signup = function signup(_ref2) {
   var username = _ref2.username,
@@ -44193,6 +44203,8 @@ var signup = function signup(_ref2) {
       },
       credentials: 'include'
     },
+    FETCH_TYPE: _types.ACCOUNT.FETCH,
+    ERROR_TYPE: _types.ACCOUNT.FETCH_ERROR,
     SUCCESS_TYPE: _types.ACCOUNT.FETCH_SUCCESS
   });
 };
@@ -44215,6 +44227,8 @@ var login = function login(_ref3) {
       },
       credentials: 'include'
     },
+    FETCH_TYPE: _types.ACCOUNT.FETCH,
+    ERROR_TYPE: _types.ACCOUNT.FETCH_ERROR,
     SUCCESS_TYPE: _types.ACCOUNT.FETCH_SUCCESS
   });
 };
@@ -44227,6 +44241,8 @@ var logout = function logout() {
     options: {
       credentials: 'include'
     },
+    FETCH_TYPE: _types.ACCOUNT.FETCH,
+    ERROR_TYPE: _types.ACCOUNT.FETCH_ERROR,
     SUCCESS_TYPE: _types.ACCOUNT.FETCH_LOGOUT_SUCCESS
   });
 };
@@ -44239,6 +44255,8 @@ var fetchAuthenticated = function fetchAuthenticated() {
     options: {
       credentials: 'include'
     },
+    FETCH_TYPE: _types.ACCOUNT.FETCH,
+    ERROR_TYPE: _types.ACCOUNT.FETCH_ERROR,
     SUCCESS_TYPE: _types.ACCOUNT.FETCH_AUTHENTICATED_SUCCESS
   });
 };
@@ -44311,13 +44329,6 @@ function (_Component) {
 }(_react.Component);
 
 ;
-fetch('http://localhost:3000/account/dragons', {
-  credentials: 'include'
-}).then(function (response) {
-  return response.json();
-}).then(function (json) {
-  return console.log('account dragons', json);
-});
 
 var _default = (0, _reactRedux.connect)(null, {
   logout: _account.logout
