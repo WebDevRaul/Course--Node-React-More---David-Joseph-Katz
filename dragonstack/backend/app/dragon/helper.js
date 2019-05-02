@@ -21,11 +21,6 @@ const getDragondWithTraits = ({dragonId}) => {
     })
   ])
   .then(([dragon, dragonTraits]) => {
-    // return new Dragon({
-    //   nickname = dragon.nickname,
-    //   birthdate = dragon.birthdate,
-    //   generationId = dragon.generationId
-    // })
     return new Dragon({...dragon, dragonId, traits: dragonTraits })
   })
   .catch(err => console.error(err));
