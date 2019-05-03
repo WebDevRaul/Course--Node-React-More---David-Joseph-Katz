@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 // Redux
 import { connect } from 'react-redux';
@@ -23,6 +24,7 @@ class AccountDragons extends Component {
               <div key={dragon.dragonId}>
                 <AccountDragonRow dragon={dragon} />
                 <hr />
+                <Link to='/'>Home</Link>
               </div>
             )
           })

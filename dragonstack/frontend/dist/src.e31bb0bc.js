@@ -48070,6 +48070,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactBootstrap = require("react-bootstrap");
 
+var _reactRouterDom = require("react-router-dom");
+
 var _reactRedux = require("react-redux");
 
 var _account = require("../actions/account");
@@ -48117,7 +48119,9 @@ function (_Component) {
       return _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Button, {
         onClick: this.props.logout,
         className: "logout-button"
-      }, "Log out"), _react.default.createElement("h2", null, "Dragon Stack test"), _react.default.createElement(_Generation.default, null), _react.default.createElement(_Dragon.default, null));
+      }, "Log out"), _react.default.createElement("h2", null, "Dragon Stack test"), _react.default.createElement(_Generation.default, null), _react.default.createElement(_Dragon.default, null), _react.default.createElement("hr", null), _react.default.createElement(_reactRouterDom.Link, {
+        to: "/account-dragons"
+      }, "Account Dragons"));
     }
   }]);
 
@@ -48131,7 +48135,7 @@ var _default = (0, _reactRedux.connect)(null, {
 })(Home);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/account":"actions/account.js","./Generation":"components/Generation.js","./Dragon":"components/Dragon.js"}],"components/AuthForm.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/account":"actions/account.js","./Generation":"components/Generation.js","./Dragon":"components/Dragon.js"}],"components/AuthForm.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48438,6 +48442,8 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _reactRedux = require("react-redux");
 
 var _accountDragons = require("../actions/accountDragons");
@@ -48490,7 +48496,9 @@ function (_Component) {
           key: dragon.dragonId
         }, _react.default.createElement(_AccountDragonRow.default, {
           dragon: dragon
-        }), _react.default.createElement("hr", null));
+        }), _react.default.createElement("hr", null), _react.default.createElement(_reactRouterDom.Link, {
+          to: "/"
+        }, "Home"));
       }));
     }
   }]);
@@ -48509,7 +48517,7 @@ var _default = (0, _reactRedux.connect)(mapStateToProps, {
 })(AccountDragons);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/accountDragons":"actions/accountDragons.js","./AccountDragonRow":"components/AccountDragonRow.js"}],"reducers/generation.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/accountDragons":"actions/accountDragons.js","./AccountDragonRow":"components/AccountDragonRow.js"}],"reducers/generation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48869,7 +48877,7 @@ store.dispatch((0, _account.fetchAuthenticated)()).then(function () {
     component: _Root.default
   }), _react.default.createElement(_reactRouterDom.Route, {
     exact: true,
-    path: "/account/dragons",
+    path: "/account-dragons",
     component: _AccountDragons.default
   })))), document.getElementById('root'));
 });

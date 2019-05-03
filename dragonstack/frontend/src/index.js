@@ -33,7 +33,7 @@ store.dispatch(fetchAuthenticated())
         <Router history={history}>
           <Switch>
             <Route exact path='/' component={Root} />
-            <Route exact path='/account/dragons' component={AccountDragons} />
+            <Route exact path='/account-dragons' component={AccountDragons} />
           </Switch>
         </Router>
       </Provider>,
