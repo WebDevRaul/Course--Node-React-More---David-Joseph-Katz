@@ -37,5 +37,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, { fetchAccountDragons })(AccountDragons)
-
-// 120
