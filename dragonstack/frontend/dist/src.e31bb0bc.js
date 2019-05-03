@@ -48866,6 +48866,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var history = (0, _createBrowserHistory.default)();
 var composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 var store = (0, _redux.createStore)(_reducers.default, composeEnhancer((0, _redux.applyMiddleware)(_reduxThunk.default)));
+
+var AuthRoute = function AuthRoute(props) {
+  if (!store.getState().account.loggedIn) {
+    return _react.default.createElement(_reactRouterDom.Redirect, {
+      to: {
+        pathname: '/'
+      }
+    });
+  }
+
+  var component = props.component,
+      path = props.path;
+  return _react.default.createElement(_reactRouterDom.Route, {
+    path: path,
+    component: component
+  });
+};
+
 store.dispatch((0, _account.fetchAuthenticated)()).then(function () {
   (0, _reactDom.render)(_react.default.createElement(_reactRedux.Provider, {
     store: store
@@ -48875,8 +48893,7 @@ store.dispatch((0, _account.fetchAuthenticated)()).then(function () {
     exact: true,
     path: "/",
     component: _Root.default
-  }), _react.default.createElement(_reactRouterDom.Route, {
-    exact: true,
+  }), _react.default.createElement(AuthRoute, {
     path: "/account-dragons",
     component: _AccountDragons.default
   })))), document.getElementById('root'));
