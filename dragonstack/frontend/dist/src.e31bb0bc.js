@@ -48384,7 +48384,11 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactBootstrap = require("react-bootstrap");
+
 var _DragonAvatar = _interopRequireDefault(require("./DragonAvatar"));
+
+var _config = require("../config");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48414,17 +48418,78 @@ function (_Component) {
   _inherits(AccountDragonRow, _Component);
 
   function AccountDragonRow() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    var _temp;
+
     _classCallCheck(this, AccountDragonRow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(AccountDragonRow).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(AccountDragonRow)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+      nickname: _this.props.dragon.nickname,
+      edit: false
+    }, _this.updateNickname = function (e) {
+      _this.setState({
+        nickname: e.target.value
+      });
+    }, _this.toggleEdit = function () {
+      _this.setState({
+        edit: !_this.state.edit
+      });
+    }, _this.save = function () {
+      fetch("".concat(_config.BACKEND.ADDRESS, "/dragon/update"), {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          dragonId: _this.props.dragon.dragonId,
+          nickname: _this.state.nickname
+        })
+      }).then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        if (json.type === 'error') {
+          allert(json.message);
+        } else {
+          _this.toggleEdit();
+        }
+      }).catch(function (error) {
+        return alert(error.message);
+      });
+    }, _temp));
   }
 
   _createClass(AccountDragonRow, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement("div", null, this.props.dragon.nickname), _react.default.createElement("br", null), _react.default.createElement(_DragonAvatar.default, {
+      return _react.default.createElement("div", null, _react.default.createElement("input", {
+        type: "text",
+        value: this.state.nickname,
+        onChange: this.updateNickname,
+        disabled: !this.state.edit
+      }), _react.default.createElement("br", null), _react.default.createElement(_DragonAvatar.default, {
         dragon: this.props.dragon
-      }));
+      }), this.state.edit ? this.saveButton : this.editButton);
+    }
+  }, {
+    key: "saveButton",
+    get: function get() {
+      return _react.default.createElement(_reactBootstrap.Button, {
+        onClick: this.save
+      }, "Save");
+    }
+  }, {
+    key: "editButton",
+    get: function get() {
+      return _react.default.createElement(_reactBootstrap.Button, {
+        onClick: this.toggleEdit
+      }, "Edit");
     }
   }]);
 
@@ -48432,7 +48497,8 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = AccountDragonRow;
-},{"react":"../node_modules/react/index.js","./DragonAvatar":"components/DragonAvatar.js"}],"components/AccountDragons.js":[function(require,module,exports) {
+;
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","./DragonAvatar":"components/DragonAvatar.js","../config":"config.js"}],"components/AccountDragons.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48926,7 +48992,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58198" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52709" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
