@@ -9,6 +9,7 @@ import { logout } from '../actions/account';
 // Components
 import Generation from './Generation';
 import Dragon from './Dragon';
+import AccountInfo from './AccountInfo';
 
 class Home extends Component {
   render() {
@@ -22,6 +23,8 @@ class Home extends Component {
         <h2>Dragon Stack test</h2>
         <Generation />
         <Dragon />
+        <hr />
+        <AccountInfo />
         <hr />
         <Link to='/account-dragons' >Account Dragons</Link>
     </div>
