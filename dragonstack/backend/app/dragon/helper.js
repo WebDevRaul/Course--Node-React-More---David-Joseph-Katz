@@ -26,10 +26,6 @@ const getDragondWithTraits = ({dragonId}) => {
   .catch(err => console.error(err));
 };
 
-getDragondWithTraits({ dragonId: 1 })
-  .then(dragon => console.log(dragon))
-  .catch(err => console.log(err))
-
 const getPublicDragons = () => {
   return new Promise((resolve, reject) => {
     pool.query(

@@ -9,6 +9,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 // Componets
 import Root from './components/Root';
 import AccountDragons from './components/AccountDragons';
+import PublicDragons from './components/PublicDragons';
 
 // Redux
 import rootReducer from './reducers';
@@ -44,6 +45,7 @@ store.dispatch(fetchAuthenticated())
           <Switch>
             <Route exact path='/' component={Root} />
             <AuthRoute path='/account-dragons' component={AccountDragons} />
+            <AuthRoute path='/public-dragons' component={PublicDragons} />
           </Switch>
         </Router>
       </Provider>,
