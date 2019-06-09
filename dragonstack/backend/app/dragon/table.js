@@ -43,7 +43,7 @@ class DragonTable {
 
   static updateDragon({ dragonId, nickname, isPublic, saleValue }) {
     const settingsMap = { nickname, isPublic, saleValue };
-    
+
     const validQueries = Object.entries(settingsMap).filter(([settingKey, settingValue]) => {
       if (settingValue !== undefined) {
         return new Promise((resolve, reject) => {
@@ -52,6 +52,7 @@ class DragonTable {
             [settingValue, dragonId],
             (error, response) => {
               if(error) return reject(error);
+              
               resolve();
             }
           )

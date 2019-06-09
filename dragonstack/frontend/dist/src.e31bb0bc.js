@@ -48538,10 +48538,20 @@ function (_Component) {
 
     return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(AccountDragonRow)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
       nickname: _this.props.dragon.nickname,
+      isPublic: _this.props.dragon.isPublic,
+      saleValue: _this.props.dragon.saleValue,
       edit: false
     }, _this.updateNickname = function (e) {
       _this.setState({
         nickname: e.target.value
+      });
+    }, _this.updateSaleValue = function (e) {
+      _this.setState({
+        saleValue: e.target.value
+      });
+    }, _this.updateIsPublic = function (e) {
+      _this.setState({
+        isPublic: e.target.checked
       });
     }, _this.toggleEdit = function () {
       _this.setState({
@@ -48555,7 +48565,9 @@ function (_Component) {
         },
         body: JSON.stringify({
           dragonId: _this.props.dragon.dragonId,
-          nickname: _this.state.nickname
+          nickname: _this.state.nickname,
+          isPublic: _this.state.isPublic,
+          saleValue: _this.state.saleValue
         })
       }).then(function (response) {
         return response.json();
@@ -48581,7 +48593,17 @@ function (_Component) {
         disabled: !this.state.edit
       }), _react.default.createElement("br", null), _react.default.createElement(_DragonAvatar.default, {
         dragon: this.props.dragon
-      }), this.state.edit ? this.saveButton : this.editButton);
+      }), _react.default.createElement("div", null, _react.default.createElement("span", null, "Sale Value: ", ' ', _react.default.createElement("input", {
+        type: "number",
+        disabled: !this.state.edit,
+        value: this.state.saleValue,
+        onChange: this.updateSaleValue
+      })), ' ', _react.default.createElement("span", null, "Public: ", ' ', _react.default.createElement("input", {
+        type: "checkbox",
+        disabled: !this.state.edit,
+        checked: this.state.isPublic,
+        onChange: this.updateIsPublic
+      })), this.state.edit ? this.saveButton : this.editButton));
     }
   }, {
     key: "saveButton",
@@ -49148,7 +49170,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52709" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53157" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

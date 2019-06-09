@@ -10,10 +10,20 @@ import { BACKEND } from '../config';
 export default class AccountDragonRow extends Component {
   state = {
     nickname: this.props.dragon.nickname,
+    isPublic: this.props.dragon.isPublic,
+    saleValue: this.props.dragon.saleValue,
     edit: false
   };
   updateNickname = e => {
     this.setState({ nickname: e.target.value });
+  };
+
+  updateSaleValue = e => {
+    this.setState({ saleValue: e.target.value })
+  };
+
+  updateIsPublic = e => {
+    this.setState({ isPublic: e.target.checked })
   };
 
   toggleEdit = () => {
@@ -33,7 +43,10 @@ export default class AccountDragonRow extends Component {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(({
-        dragonId: this.props.dragon.dragonId, nickname: this.state.nickname
+        dragonId: this.props.dragon.dragonId, 
+        nickname: this.state.nickname,
+        isPublic: this.state.isPublic,
+        saleValue: this.state.saleValue
       }))
     }).then(response => response.json())
       .then(json => {
@@ -57,9 +70,30 @@ export default class AccountDragonRow extends Component {
         />
         <br />
         <DragonAvatar dragon={this.props.dragon} />
-        {
-          this.state.edit ? this.saveButton : this.editButton
-        }
+        <div>
+          <span>
+            Sale Value: {' '}
+            <input 
+              type='number'
+              disabled={!this.state.edit}
+              value={this.state.saleValue}
+              onChange={this.updateSaleValue}
+            />
+          </span>
+            {' '}
+          <span>
+            Public: {' '}
+            <input 
+              type='checkbox' 
+              disabled={!this.state.edit}
+              checked={this.state.isPublic}
+              onChange={this.updateIsPublic}
+            />
+          </span>
+          {
+            this.state.edit ? this.saveButton : this.editButton
+          }
+        </div>
       </div>
     );
   };
