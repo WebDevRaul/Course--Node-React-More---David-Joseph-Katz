@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
+import history from './history';
 
 // Componets
 import Root from './components/Root';
@@ -16,8 +16,6 @@ import rootReducer from './reducers';
 import { fetchAuthenticated } from './actions/account';
 
 import './index.css';
-
-const history = createBrowserHistory();
 
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

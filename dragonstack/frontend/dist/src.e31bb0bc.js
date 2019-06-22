@@ -32435,7 +32435,22 @@ if ("development" === 'production') {
 require('./warnAboutDeprecatedCJSRequire.js')('createBrowserHistory');
 module.exports = require('./index.js').createBrowserHistory;
 
-},{"./warnAboutDeprecatedCJSRequire.js":"../node_modules/history/warnAboutDeprecatedCJSRequire.js","./index.js":"../node_modules/history/index.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
+},{"./warnAboutDeprecatedCJSRequire.js":"../node_modules/history/warnAboutDeprecatedCJSRequire.js","./index.js":"../node_modules/history/index.js"}],"history.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createBrowserHistory = _interopRequireDefault(require("history/createBrowserHistory"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = (0, _createBrowserHistory.default)();
+
+exports.default = _default;
+},{"history/createBrowserHistory":"../node_modules/history/createBrowserHistory.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
 var define;
 /*!
   Copyright (c) 2017 Jed Watson.
@@ -48731,6 +48746,12 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _DragonAvatar = _interopRequireDefault(require("./DragonAvatar"));
 
+var _reactBootstrap = require("react-bootstrap");
+
+var _config = require("../config");
+
+var _history = _interopRequireDefault(require("../history"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -48759,9 +48780,44 @@ function (_Component) {
   _inherits(PublicDragonRow, _Component);
 
   function PublicDragonRow() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    var _temp;
+
     _classCallCheck(this, PublicDragonRow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(PublicDragonRow).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(PublicDragonRow)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.buy = function () {
+      var _this$props$dragon = _this.props.dragon,
+          dragonId = _this$props$dragon.dragonId,
+          saleValue = _this$props$dragon.saleValue;
+      fetch("".concat(_config.BACKEND.ADDRESS, "/dragon/buy"), {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          dragonId: dragonId,
+          saleValue: saleValue
+        })
+      }).then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        alert(json.message);
+
+        if (json.type !== 'error') {
+          _history.default.push('/account-dragons');
+        }
+      }).catch(function (error) {
+        return alert(error.message);
+      });
+    }, _temp));
   }
 
   _createClass(PublicDragonRow, [{
@@ -48769,7 +48825,9 @@ function (_Component) {
     value: function render() {
       return _react.default.createElement("div", null, _react.default.createElement("div", null, this.props.dragon.nickname), _react.default.createElement(_DragonAvatar.default, {
         dragon: this.props.dragon
-      }), _react.default.createElement("div", null, "Sale Value: ", this.props.dragon.saleValue));
+      }), _react.default.createElement("div", null, "Sale Value: ", this.props.dragon.saleValue), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
+        onClick: this.buy
+      }, "Buy"));
     }
   }]);
 
@@ -48777,7 +48835,8 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = PublicDragonRow;
-},{"react":"../node_modules/react/index.js","./DragonAvatar":"components/DragonAvatar.js"}],"actions/publicDragons.js":[function(require,module,exports) {
+;
+},{"react":"../node_modules/react/index.js","./DragonAvatar":"components/DragonAvatar.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","../config":"config.js","../history":"history.js"}],"actions/publicDragons.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49337,7 +49396,7 @@ var _reduxThunk = _interopRequireDefault(require("redux-thunk"));
 
 var _reactRouterDom = require("react-router-dom");
 
-var _createBrowserHistory = _interopRequireDefault(require("history/createBrowserHistory"));
+var _history = _interopRequireDefault(require("./history"));
 
 var _Root = _interopRequireDefault(require("./components/Root"));
 
@@ -49355,7 +49414,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // Componets
 // Redux
-var history = (0, _createBrowserHistory.default)();
 var composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 var store = (0, _redux.createStore)(_reducers.default, composeEnhancer((0, _redux.applyMiddleware)(_reduxThunk.default)));
 
@@ -49380,7 +49438,7 @@ store.dispatch((0, _account.fetchAuthenticated)()).then(function () {
   (0, _reactDom.render)(_react.default.createElement(_reactRedux.Provider, {
     store: store
   }, _react.default.createElement(_reactRouterDom.Router, {
-    history: history
+    history: _history.default
   }, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/",
@@ -49393,7 +49451,7 @@ store.dispatch((0, _account.fetchAuthenticated)()).then(function () {
     component: _PublicDragons.default
   })))), document.getElementById('root'));
 });
-},{"react":"../node_modules/react/index.js","redux":"../node_modules/redux/es/redux.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js","redux-thunk":"../node_modules/redux-thunk/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","history/createBrowserHistory":"../node_modules/history/createBrowserHistory.js","./components/Root":"components/Root.js","./components/AccountDragons":"components/AccountDragons.js","./components/PublicDragons":"components/PublicDragons.js","./reducers":"reducers/index.js","./actions/account":"actions/account.js","./index.css":"index.css"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","redux":"../node_modules/redux/es/redux.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js","redux-thunk":"../node_modules/redux-thunk/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./history":"history.js","./components/Root":"components/Root.js","./components/AccountDragons":"components/AccountDragons.js","./components/PublicDragons":"components/PublicDragons.js","./reducers":"reducers/index.js","./actions/account":"actions/account.js","./index.css":"index.css"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
