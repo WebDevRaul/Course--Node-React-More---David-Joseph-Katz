@@ -4,7 +4,7 @@ const DragonTable = require('../dragon/table');
 const { authenticatedAccount } = require('./helper');
 const AccountDragonTable = require('../accountDragon/table');
 const { getPublicDragons } = require('../dragon/helper');
-const { AccountTable } = require('../account/table');
+const AccountTable = require('../account/table');
 
 router.get('/new', (req, res, next) => {
   let accountId, dragon;
