@@ -6,6 +6,15 @@ import history from '../history';
 
 export default class PublicDragonRow extends Component {
 
+  state = {
+    displayMatingOptions: false
+  }
+
+
+  toggleDisplayMatingOption = () => {
+    this.setState({ displayMatingOptions: !this.state.displayMatingOptions })
+  };
+
   buy = () => {
     const { dragonId, saleValue } = this.props.dragon;
     fetch(`${BACKEND.ADDRESS}/dragon/buy`, {
@@ -29,9 +38,19 @@ export default class PublicDragonRow extends Component {
       <div>
         <div>{this.props.dragon.nickname}</div>
         <DragonAvatar dragon={this.props.dragon} />
-        <div>Sale Value: {this.props.dragon.saleValue}</div>
+        <div>
+          <span>Sale Value: {this.props.dragon.saleValue}</span>{' | '}
+          <span>Sire Value: {this.props.dragon.sireValue}</span>
+          </div>
         <br />
-        <Button onClick={this.buy} >Buy</Button>
+        <Button onClick={this.buy} >Buy</Button>{' '}
+        <Button onClick={this.toggleDisplayMatingOption}>Sire</Button>
+        <br />
+        {
+          this.state.displayMatingOptions ? 
+          <div>Mating Option</div> :
+          <div></div>
+        }
       </div>
     );
   };

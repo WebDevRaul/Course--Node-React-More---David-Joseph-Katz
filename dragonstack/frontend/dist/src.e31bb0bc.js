@@ -48805,7 +48805,13 @@ function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(PublicDragonRow)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.buy = function () {
+    return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(PublicDragonRow)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+      displayMatingOptions: false
+    }, _this.toggleDisplayMatingOption = function () {
+      _this.setState({
+        displayMatingOptions: !_this.state.displayMatingOptions
+      });
+    }, _this.buy = function () {
       var _this$props$dragon = _this.props.dragon,
           dragonId = _this$props$dragon.dragonId,
           saleValue = _this$props$dragon.saleValue;
@@ -48838,9 +48844,11 @@ function (_Component) {
     value: function render() {
       return _react.default.createElement("div", null, _react.default.createElement("div", null, this.props.dragon.nickname), _react.default.createElement(_DragonAvatar.default, {
         dragon: this.props.dragon
-      }), _react.default.createElement("div", null, "Sale Value: ", this.props.dragon.saleValue), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
+      }), _react.default.createElement("div", null, _react.default.createElement("span", null, "Sale Value: ", this.props.dragon.saleValue), ' | ', _react.default.createElement("span", null, "Sire Value: ", this.props.dragon.sireValue)), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
         onClick: this.buy
-      }, "Buy"));
+      }, "Buy"), ' ', _react.default.createElement(_reactBootstrap.Button, {
+        onClick: this.toggleDisplayMatingOption
+      }, "Sire"), _react.default.createElement("br", null), this.state.displayMatingOptions ? _react.default.createElement("div", null, "Mating Option") : _react.default.createElement("div", null));
     }
   }]);
 
