@@ -103,7 +103,7 @@ router.post('/mate', (req, res, next) => {
 
   getDragondWithTraits({ dragonId: patronDragonId })
     .then(dragon => {
-      if(dragon.isPublic) {
+      if(!dragon.isPublic) {
         throw new Error('Dragon must be public');
       };
 
@@ -126,7 +126,7 @@ router.post('/mate', (req, res, next) => {
 
       matronAccountId = account.id;
 
-      return AccountDragonTable.getDragonAccount({ dragonId: patronAccountId });
+      return AccountDragonTable.getDragonAccount({ dragonId: patronDragonId });
     })
     .then(({ accountId }) => {
       patronAccountId = accountId;
