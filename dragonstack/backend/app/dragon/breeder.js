@@ -45,12 +45,3 @@ class Breeder {
 
 
 module.exports = Breeder;
-const foobar  = new Dragon();
-const gooby = new Dragon();
-
-console.log('foobar', foobar);
-console.log('gooby', gooby);
-
-const foogooby = Breeder.breadDragon({ matron: foobar, patron: gooby });
-
-console.log('foogooby', foogooby);
