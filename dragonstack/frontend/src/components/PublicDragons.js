@@ -7,11 +7,13 @@ import PublicDragonRow from './PublicDragonRow';
 // Redux
 import { connect } from 'react-redux';
 import { fetchPublicDragons } from '../actions/publicDragons';
+import { fetchAccountDragons } from '../actions/accountDragons';
 
 class PublicDragons extends Component {
 
   componentDidMount() {
     this.props.fetchPublicDragons();
+    this.props.fetchAccountDragons();
   }
   render() {
     return (
@@ -36,4 +38,4 @@ const mapStateToProps = state => ({
   publicDragons: state.publicDragons
 });
 
-export default connect(mapStateToProps, { fetchPublicDragons })(PublicDragons)
+export default connect(mapStateToProps, { fetchPublicDragons, fetchAccountDragons })(PublicDragons)
